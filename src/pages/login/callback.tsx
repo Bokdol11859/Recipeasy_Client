@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 const Callback = () => {
   const { query, isReady, push } = useRouter();
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     const res = await fetch(`https://recipeasy.link/auth/kakao?code=${query.code}`);
     const data = await res.json();
     console.log(data);
-  };
+  }, [query]);
 
   useEffect(() => {
     if (isReady) {
@@ -16,7 +16,7 @@ const Callback = () => {
       // save token
       push('/nickname');
     }
-  }, [isReady]);
+  }, [isReady, getData, push]);
 
   return <div></div>;
 };
