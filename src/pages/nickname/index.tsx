@@ -35,7 +35,7 @@ const Nickname = () => {
       </Main>
       <Footer>
         <Button active={name.length !== 0} onClick={() => {}}>
-          test
+          시작하기
         </Button>
       </Footer>
     </Container>
@@ -58,7 +58,7 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 33%;
+  padding-bottom: 50%;
 `;
 
 const Heading = styled.h1`
