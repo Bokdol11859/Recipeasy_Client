@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { KakaoLogin } from '@src/components/icons/SocialIcons';
 import COLOR from '@src/constants/theme';
 import Image from 'next/image';
@@ -9,11 +8,11 @@ const Login = () => {
   const { push } = useRouter();
 
   return (
-    <Container>
-      <Logo>
+    <div className="w-full h-full flex items-center justify-center flex-col">
+      <div className="flex items-center justify-center w-full flex-grow">
         <Image src="/assets/LoginLogo.png" alt="Login Logo" width={220} height={90} />
-      </Logo>
-      <Footer>
+      </div>
+      <div className="flex items-center justify-center h-52">
         <KakaoLogin
           onClick={() => {
             push(
@@ -21,34 +20,9 @@ const Login = () => {
             );
           }}
         />
-      </Footer>
-    </Container>
+      </div>
+    </div>
   );
 };
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  /* background-color: ${COLOR.BACKGROUND}; */
-`;
-
-const Logo = styled.div`
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-`;
-
-const Footer = styled.div`
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 export default Login;
