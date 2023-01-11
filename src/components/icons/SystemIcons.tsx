@@ -3,8 +3,8 @@ export const DeleteIcon = ({ onClick }: { onClick: () => void }) => (
     <path
       d="M3 3.08789L11 11.0879M3 11.0879L11 3.08789"
       stroke="#B3B3B3"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
