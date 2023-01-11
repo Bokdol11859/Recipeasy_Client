@@ -1,3 +1,4 @@
+import { AxiosPrivate } from '@src/api/axios';
 import Button from '@src/components/Button';
 import { DeleteIcon } from '@src/components/icons/SystemIcons';
 import { useRouter } from 'next/router';
@@ -10,6 +11,18 @@ const Nickname = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+  };
+
+  const handleClick = async () => {
+    try {
+      await AxiosPrivate.post('/user/nickname', {
+        nickname: name,
+      });
+
+      push('/home');
+    } catch {
+      alert('Error');
+    }
   };
 
   return (
@@ -35,11 +48,7 @@ const Nickname = () => {
         </div>
       </div>
       <div className="w-full h-36 flex items-center justify-center">
-        <Button
-          active={name.length !== 0}
-          onClick={() => {
-            push('/home');
-          }}>
+        <Button active={name.length !== 0} onClick={handleClick}>
           시작하기
         </Button>
       </div>
