@@ -1,5 +1,5 @@
 import { AxiosPrivate } from '@src/api/axios';
-import Button from '@src/components/Button';
+import Button from '@src/components/global/Button';
 import { DeleteIcon } from '@src/components/icons/SystemIcons';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useState } from 'react';
