@@ -5,6 +5,7 @@ import { getUserInfo } from '@src/api/fetcher';
 import { SettingIcon } from '@src/components/icons/SystemIcons';
 import CATEGORY from '@src/constants/category';
 import { ICard, ILargeCard, LargeCard, SmallCard } from '@src/components/global/Cards';
+import { useRouter } from 'next/router';
 
 const SINGLEDATA: ICard[] = Array(10)
   .fill('')
@@ -31,6 +32,8 @@ const MyPage = () => {
 
   const [category, setCategory] = useState(CATEGORY.SINGLE);
 
+  const { push } = useRouter();
+
   if (isLoading) return <div>Loading...</div>;
 
   if (error) {
@@ -41,7 +44,11 @@ const MyPage = () => {
     <>
       <div className="w-full h-full px-6 pt-6">
         <div className="w-full flex justify-end items-center">
-          <SettingIcon onClick={() => {}} />
+          <SettingIcon
+            onClick={() => {
+              push('/settings');
+            }}
+          />
         </div>
         <div className="flex items-center justify-between mt-6">
           <p className="text-2xl font-extrabold">{data.nickname}님</p>
@@ -64,6 +71,7 @@ const MyPage = () => {
             {category === CATEGORY.SINGLE && (
               <p className="text-[#FE8C46] text-xs font-semibold">{SINGLEDATA.length}개의 개별 레시피</p>
             )}
+
             {category === CATEGORY.THEME && (
               <p className="text-[#FE8C46] text-xs font-semibold">{THEMEDATA.length}개의 테마 레시피</p>
             )}
@@ -77,6 +85,7 @@ const MyPage = () => {
             ))}
           </div>
         )}
+
         {category === CATEGORY.THEME && (
           <div className="w-full h-full pb-64 flex flex-wrap items-center justify-center gap-y-4 overflow-y-scroll scrollbar-hide">
             {THEMEDATA.map((data) => (
