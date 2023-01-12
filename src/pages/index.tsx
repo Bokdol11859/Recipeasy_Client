@@ -1,11 +1,24 @@
+import { getUserInfo, refreshTokens } from '@src/api/fetcher';
 import { KakaoLogin } from '@src/components/icons/SocialIcons';
 import COLOR from '@src/constants/theme';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 const Login = () => {
   const { push } = useRouter();
+
+  const autoLogin = useCallback(async () => {
+    const res = await refreshTokens();
+    if (res) {
+      push('/home');
+    }
+  }, [push]);
+
+  useEffect(() => {
+    autoLogin();
+  }, [autoLogin]);
 
   return (
     <div className="w-full h-full flex items-center justify-center flex-col">

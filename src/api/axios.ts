@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { refreshTokens } from './fetcher';
 
 export const AxiosPublic = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
@@ -15,21 +16,15 @@ export const AxiosPrivate = axios.create({
 });
 
 AxiosPrivate.interceptors.request.use(async (req) => {
-  const refresh = localStorage.getItem('refresh');
-  try {
-    const response = await AxiosPublic.post('/token/refresh/', {
-      refresh: refresh,
-    });
-
-    localStorage.setItem('refresh', response.data.refresh);
-    localStorage.setItem('access', response.data.access);
-
-    req.headers = {
-      Authorization: `Bearer ${response.data.access}`,
-    };
-  } catch {
-    //Refresh Token Expired
+  const res = await refreshTokens();
+  if (!res) {
+    alert('로그인 만료');
     window.location.href = '/';
   }
+  const access = localStorage.getItem('access');
+  req.headers = {
+    Authorization: `Bearer ${access}`,
+  };
+
   return req;
 });
