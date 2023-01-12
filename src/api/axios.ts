@@ -1,5 +1,5 @@
+import refreshTokens from '@src/utils/refreshTokens';
 import axios from 'axios';
-import { refreshTokens } from './fetcher';
 
 export const AxiosPublic = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
