@@ -38,3 +38,30 @@ export const SaveIcon = ({ onClick, isActive }: { onClick: () => void; isActive:
     />
   </svg>
 );
+
+export const BackArrowIcon = ({ onClick }: { onClick: () => void }) => (
+  <svg onClick={onClick} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.5 5L7 12.5L14.5 20" stroke="#120000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const SearchIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle
+      cx="9.84442"
+      cy="9.84442"
+      r="5.99237"
+      stroke="#B3B3B3"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M14.0122 14.3235L16.3616 16.6667"
+      stroke="#B3B3B3"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
