@@ -3,11 +3,17 @@ import GNB from '../components/global/GNB';
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '@src/api/fetcher';
 import { SettingIcon } from '@src/components/icons/SystemIcons';
-import CATEGORY from '@src/constants/category';
-import { ICard, ILargeCard, LargeCard, SmallCard } from '@src/components/global/Cards';
+import { LargeCard, SmallCard } from '@src/components/global/Cards';
 import { useRouter } from 'next/router';
+import RecipeType from '@src/types/RecipeType';
+import ThemeType from '@src/types/ThemeType';
 
-const SINGLEDATA: ICard[] = Array(10)
+const CATEGORY = {
+  SINGLE: 'single',
+  THEME: 'theme',
+};
+
+const SINGLEDATA: RecipeType[] = Array(10)
   .fill('')
   .map((_, idx) => ({
     id: idx,
@@ -16,7 +22,7 @@ const SINGLEDATA: ICard[] = Array(10)
     image: '/assets/SmallCardDummy.png',
   }));
 
-const THEMEDATA: ILargeCard[] = Array(20)
+const THEMEDATA: ThemeType[] = Array(20)
   .fill('')
   .map((_, idx) => ({
     id: idx,
@@ -107,7 +113,7 @@ const MyPage = () => {
   );
 };
 
-const ActiveTab = 'font-extrabold text-lg';
-const InactiveTab = 'font-extrabold text-lg text-[#B3B3B3]';
+export const ActiveTab = 'font-extrabold text-lg';
+export const InactiveTab = 'font-extrabold text-lg text-[#B3B3B3]';
 
 export default MyPage;
