@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
-import GNB from '../../components/global/GNB';
+import GNB from '../components/global/GNB';
 import { BackArrowIcon, SearchIcon } from '@src/components/icons/SystemIcons';
 import SearchTags from '@src/components/search/SearchSuggestion';
 import SearchSuggestion from '@src/components/search/SearchSuggestion';
+import SearchResult from '@src/components/search/SearchResult';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -39,7 +40,7 @@ const Search = () => {
             </div>
           )}
         </div>
-        {query.length === 0 ? <SearchSuggestion onClick={setQuery} /> : <></>}
+        {query.length === 0 ? <SearchSuggestion onClick={setQuery} /> : <SearchResult />}
       </div>
       <GNB />
     </>
