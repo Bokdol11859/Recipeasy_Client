@@ -57,15 +57,15 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-full h-full  px-6">
-        <div className="w-full h-10 flex items-center justify-start gap-5 pt-10">
+      <div className="h-full w-full px-6">
+        <div className="flex h-10 w-full items-center justify-start gap-5 pt-10">
           <p
             onClick={() => {
               setCategory(CATEGORY.ALL);
             }}
             className={category === CATEGORY.ALL ? ActiveTab : InactiveTab}>
             전체보기
-            {category === CATEGORY.ALL && <div className="w-full h-[2px] bg-black" />}
+            {category === CATEGORY.ALL && <div className="h-[2px] w-full bg-black" />}
           </p>
 
           <p
@@ -74,7 +74,7 @@ const Home = () => {
             }}
             className={category === CATEGORY.THEME ? ActiveTab : InactiveTab}>
             테마별 보기
-            {category === CATEGORY.THEME && <div className="w-full h-[2px] bg-black" />}
+            {category === CATEGORY.THEME && <div className="h-[2px] w-full bg-black" />}
           </p>
         </div>
         {category === CATEGORY.ALL && <AllTheme data={THEMEDATA} />}

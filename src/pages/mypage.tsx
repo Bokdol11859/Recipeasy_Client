@@ -48,18 +48,18 @@ const MyPage = () => {
 
   return (
     <>
-      <div className="w-full h-full px-6 pt-6">
-        <div className="w-full flex justify-end items-center">
+      <div className="h-full w-full px-6 pt-6">
+        <div className="flex w-full items-center justify-end">
           <SettingIcon
             onClick={() => {
               push('/settings');
             }}
           />
         </div>
-        <div className="flex items-center justify-between mt-6">
+        <div className="mt-6 flex items-center justify-between">
           <p className="text-2xl font-extrabold">{data.nickname}님</p>
         </div>
-        <div className="flex items-center justify-center gap-6 mt-6">
+        <div className="mt-6 flex items-center justify-center gap-6">
           <p
             className={category === CATEGORY.SINGLE ? ActiveTab : InactiveTab}
             onClick={() => setCategory(CATEGORY.SINGLE)}>
@@ -72,20 +72,20 @@ const MyPage = () => {
           </p>
         </div>
 
-        <div className="w-full mt-6 mb-3">
-          <div className="w-28 h-7 bg-[#FFEEE3] rounded-lg flex items-center justify-center">
+        <div className="mt-6 mb-3 w-full">
+          <div className="flex h-7 w-28 items-center justify-center rounded-lg bg-[#FFEEE3]">
             {category === CATEGORY.SINGLE && (
-              <p className="text-[#FE8C46] text-xs font-semibold">{SINGLEDATA.length}개의 개별 레시피</p>
+              <p className="text-xs font-semibold text-[#FE8C46]">{SINGLEDATA.length}개의 개별 레시피</p>
             )}
 
             {category === CATEGORY.THEME && (
-              <p className="text-[#FE8C46] text-xs font-semibold">{THEMEDATA.length}개의 테마 레시피</p>
+              <p className="text-xs font-semibold text-[#FE8C46]">{THEMEDATA.length}개의 테마 레시피</p>
             )}
           </div>
         </div>
 
         {category === CATEGORY.SINGLE && (
-          <div className="w-full h-full pb-64 flex flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll scrollbar-hide">
+          <div className="flex h-full w-full flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
             {SINGLEDATA.map((data) => (
               <SmallCard key={data.id} id={data.id} title={data.title} isSaved={data.isSaved} image={data.image} />
             ))}
@@ -93,7 +93,7 @@ const MyPage = () => {
         )}
 
         {category === CATEGORY.THEME && (
-          <div className="w-full h-full pb-64 flex flex-wrap items-center justify-center gap-y-4 overflow-y-scroll scrollbar-hide">
+          <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
             {THEMEDATA.map((data) => (
               <LargeCard
                 key={data.id}

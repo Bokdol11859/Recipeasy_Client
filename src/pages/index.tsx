@@ -21,11 +21,11 @@ const Login = () => {
   }, [autoLogin]);
 
   return (
-    <div className="w-full h-full flex items-center justify-center flex-col">
-      <div className="flex items-center justify-center w-full flex-grow">
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      <div className="flex w-full flex-grow items-center justify-center">
         <Image src="/assets/LoginLogo.png" alt="Login Logo" width={220} height={90} />
       </div>
-      <div className="flex items-center justify-center h-52">
+      <div className="flex h-52 items-center justify-center">
         <KakaoLogin
           onClick={() => {
             push(

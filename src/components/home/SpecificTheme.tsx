@@ -26,7 +26,7 @@ const SpecificTheme = ({ data }: any) => {
         </div>
       )}
 
-      <div className="flex items-center gap-3 justify-start py-4">
+      <div className="flex items-center justify-start gap-3 py-4">
         <div
           onClick={() => {
             setTheme(0);
@@ -43,7 +43,7 @@ const SpecificTheme = ({ data }: any) => {
         </div>
       </div>
 
-      <div className="w-full h-full pb-64 pt-5 flex flex-wrap items-center justify-center gap-y-4 overflow-y-scroll scrollbar-hide">
+      <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 pt-5 scrollbar-hide">
         {theme === 0 &&
           data[0].themes.map((theme: ThemeType) => (
             <LongLargeCard

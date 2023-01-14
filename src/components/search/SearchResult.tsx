@@ -35,7 +35,7 @@ const SearchResult = (props: Props) => {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-6 my-6 ">
+      <div className="my-6 flex items-center justify-center gap-6 ">
         <p
           className={category === CATEGORY.SINGLE ? ActiveTab : InactiveTab}
           onClick={() => setCategory(CATEGORY.SINGLE)}>
@@ -49,7 +49,7 @@ const SearchResult = (props: Props) => {
       </div>
 
       {category === CATEGORY.SINGLE && (
-        <div className="w-full h-full pb-64 flex flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll scrollbar-hide">
+        <div className="flex h-full w-full flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
           {SINGLEDATA.map((data) => (
             <SmallCard key={data.id} id={data.id} title={data.title} isSaved={data.isSaved} image={data.image} />
           ))}
@@ -57,7 +57,7 @@ const SearchResult = (props: Props) => {
       )}
 
       {category === CATEGORY.THEME && (
-        <div className="w-full h-full pb-64 flex flex-wrap items-center justify-center gap-y-4 overflow-y-scroll scrollbar-hide">
+        <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
           {THEMEDATA.map((data) => (
             <LargeCard
               key={data.id}

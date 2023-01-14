@@ -14,8 +14,8 @@ const Search = () => {
 
   return (
     <>
-      <div className="w-full h-full px-5 pt-6">
-        <div className="w-full mb-4 h-9 flex items-center justify-center">
+      <div className="h-full w-full px-5 pt-6">
+        <div className="mb-4 flex h-9 w-full items-center justify-center">
           {query.length > 0 && (
             <div className="mr-3">
               <BackArrowIcon
@@ -27,7 +27,7 @@ const Search = () => {
           )}
           <input
             className={
-              'relative flex-grow bg-[#F3F2F2] rounded-lg h-full text-black text-sm font-medium ' +
+              'relative h-full flex-grow rounded-lg bg-[#F3F2F2] text-sm font-medium text-black ' +
               (query.length === 0 ? 'px-10' : 'px-4')
             }
             placeholder="재료 검색어를 입력해주세요"

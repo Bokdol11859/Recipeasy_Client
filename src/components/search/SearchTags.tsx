@@ -11,11 +11,11 @@ const SearchTags = ({
 }) => {
   return (
     <div
-      className="h-10 bg-[#FBF9F6] rounded-lg p-3 flex items-center justify-center"
+      className="flex h-10 items-center justify-center rounded-lg bg-[#FBF9F6] p-3"
       onClick={() => {
         onClick(text);
       }}>
-      <p className="text-base font-medium mr-1">{text}</p>
+      <p className="mr-1 text-base font-medium">{text}</p>
       {isIcon && <img src={`/assets/icons/${text}.svg`} width={20} height={20} />}
     </div>
   );

@@ -8,7 +8,7 @@ const AllTheme = ({ data }: any) => {
         <h1 className="text-2xl font-bold">오늘의 레시피지</h1>
         <h1 className="text-2xl font-bold">추천 테마는?</h1>
       </div>
-      <div className="w-full h-full pb-64 flex flex-wrap items-center justify-center gap-y-4 overflow-y-scroll scrollbar-hide">
+      <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
         {data.map((theme: ThemeType) => (
           <LargeCard
             key={theme.id}

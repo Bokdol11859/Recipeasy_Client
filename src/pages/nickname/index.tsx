@@ -26,12 +26,12 @@ const Nickname = () => {
   };
 
   return (
-    <div className="h-full w-full flex items-center justify-center px-6 flex-col">
-      <div className="w-full flex items-center justify-center flex-col pb-[50%] grow gap-4">
-        <h1 className="w-full text-black text-2xl font-bold">닉네임을 정해주세요</h1>
+    <div className="flex h-full w-full flex-col items-center justify-center px-6">
+      <div className="flex w-full grow flex-col items-center justify-center gap-4 pb-[50%]">
+        <h1 className="w-full text-2xl font-bold text-black">닉네임을 정해주세요</h1>
         <div className="relative w-full">
           <input
-            className="w-full h-10 px-4 border-none bg-[#f3f2f2] rounded-lg font-medium text-sm text-[#b3b3b3] focus:text-black"
+            className="h-10 w-full rounded-lg border-none bg-[#f3f2f2] px-4 text-sm font-medium text-[#b3b3b3] focus:text-black"
             placeholder="닉네임을 입력해주세요!"
             onChange={handleChange}
             value={name}
@@ -47,7 +47,7 @@ const Nickname = () => {
           )}
         </div>
       </div>
-      <div className="w-full h-36 flex items-center justify-center">
+      <div className="flex h-36 w-full items-center justify-center">
         <Button active={name.length !== 0} onClick={handleClick}>
           시작하기
         </Button>
