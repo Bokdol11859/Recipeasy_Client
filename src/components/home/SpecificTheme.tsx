@@ -1,8 +1,20 @@
-import { useState } from 'react';
-import { LongLargeCard } from '../global/Cards';
+import { useEffect, useState } from 'react';
+import { LoadingLongLargeCard, LongLargeCard } from '../global/Cards';
 import ThemeType from '@src/types/ThemeType';
 
 const SpecificTheme = ({ data }: any) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loading = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(loading);
+    };
+  }, []);
+
   const ActiveTheme =
     'flex items-center justify-center bg-[#FE8C46] rounded-lg w-28 h-10 text-white font-semibold text-sm';
   const InactiveTheme =
@@ -44,6 +56,11 @@ const SpecificTheme = ({ data }: any) => {
       </div>
 
       <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 pt-5 scrollbar-hide">
+        {isLoading &&
+          Array(10)
+            .fill('')
+            .map((_, idx) => <LoadingLongLargeCard key={idx} />)}
+
         {theme === 0 &&
           data[0].themes.map((theme: ThemeType) => (
             <LongLargeCard

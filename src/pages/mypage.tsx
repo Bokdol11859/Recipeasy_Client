@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GNB from '../components/global/GNB';
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '@src/api/fetcher';
 import { SettingIcon } from '@src/components/icons/SystemIcons';
-import { LargeCard, SmallCard } from '@src/components/global/Cards';
+import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '@src/components/global/Cards';
 import { useRouter } from 'next/router';
 import RecipeType from '@src/types/RecipeType';
 import ThemeType from '@src/types/ThemeType';
@@ -37,10 +37,14 @@ const MyPage = () => {
   const { isLoading, error, data } = useQuery(['UserInfo'], getUserInfo);
 
   const [category, setCategory] = useState(CATEGORY.SINGLE);
+  const [nickname, setNickname] = useState('');
+
+  useEffect(() => {
+    let temp = localStorage.getItem('nickname');
+    setNickname(temp || '');
+  }, []);
 
   const { push } = useRouter();
-
-  if (isLoading) return <div>Loading...</div>;
 
   if (error) {
     alert(error);
@@ -57,7 +61,7 @@ const MyPage = () => {
           />
         </div>
         <div className="mt-6 flex items-center justify-between">
-          <p className="text-2xl font-extrabold">{data.nickname}님</p>
+          <p className="text-2xl font-extrabold">{nickname}님</p>
         </div>
         <div className="mt-6 flex items-center justify-center gap-6">
           <p
@@ -86,6 +90,10 @@ const MyPage = () => {
 
         {category === CATEGORY.SINGLE && (
           <div className="flex h-full w-full flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
+            {isLoading &&
+              Array(10)
+                .fill('')
+                .map((_, idx) => <LoadingSmallCard key={idx} />)}
             {SINGLEDATA.map((data) => (
               <SmallCard key={data.id} id={data.id} title={data.title} isSaved={data.isSaved} image={data.image} />
             ))}
@@ -94,6 +102,10 @@ const MyPage = () => {
 
         {category === CATEGORY.THEME && (
           <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
+            {isLoading &&
+              Array(10)
+                .fill('')
+                .map((_, idx) => <LoadingLargeCard key={idx} />)}
             {THEMEDATA.map((data) => (
               <LargeCard
                 key={data.id}

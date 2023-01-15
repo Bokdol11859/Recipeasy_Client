@@ -1,7 +1,20 @@
 import ThemeType from '@src/types/ThemeType';
-import { LargeCard } from '../global/Cards';
+import { LargeCard, LoadingLargeCard } from '../global/Cards';
+import { useEffect, useState } from 'react';
 
 const AllTheme = ({ data }: any) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loading = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(loading);
+    };
+  }, []);
+
   return (
     <>
       <div className="pt-14 pb-6">
@@ -9,6 +22,10 @@ const AllTheme = ({ data }: any) => {
         <h1 className="text-2xl font-bold">추천 테마는?</h1>
       </div>
       <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
+        {isLoading &&
+          Array(10)
+            .fill('')
+            .map((_, idx) => <LoadingLargeCard key={idx} />)}
         {data.map((theme: ThemeType) => (
           <LargeCard
             key={theme.id}

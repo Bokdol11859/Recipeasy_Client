@@ -20,6 +20,7 @@ const Callback = () => {
     localStorage.setItem('refresh', res.data.refresh);
 
     if (res.data.has_nickname) {
+      localStorage.setItem('nickname', res.data.nickname || '');
       push('/home');
     } else {
       push('/nickname');

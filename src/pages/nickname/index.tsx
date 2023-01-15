@@ -19,6 +19,7 @@ const Nickname = () => {
         nickname: name,
       });
 
+      localStorage.setItem('nickname', name);
       push('/home');
     } catch {
       alert('Error');
