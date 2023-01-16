@@ -4,13 +4,16 @@ import { BackArrowIcon, SearchIcon } from '@src/components/icons/SystemIcons';
 import SearchTags from '@src/components/search/SearchSuggestion';
 import SearchSuggestion from '@src/components/search/SearchSuggestion';
 import SearchResult from '@src/components/search/SearchResult';
+import useDebounce from '@src/hooks/useDebounce';
 
 const Search = () => {
   const [query, setQuery] = useState('');
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
+
+  const debouncedQuery = useDebounce(query);
 
   return (
     <>
@@ -40,7 +43,7 @@ const Search = () => {
             </div>
           )}
         </div>
-        {query.length === 0 ? <SearchSuggestion onClick={setQuery} /> : <SearchResult />}
+        {query.length === 0 ? <SearchSuggestion onClick={setQuery} /> : <SearchResult query={debouncedQuery} />}
       </div>
       <GNB />
     </>
