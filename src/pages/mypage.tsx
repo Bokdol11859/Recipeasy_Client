@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GNB from '../components/global/GNB';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '@src/api/fetcher';
 import { SettingIcon } from '@src/components/icons/SystemIcons';
 import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '@src/components/global/Cards';
@@ -9,34 +9,14 @@ import RecipeType from '@src/types/RecipeType';
 import ThemeType from '@src/types/ThemeType';
 
 const CATEGORY = {
-  SINGLE: 'single',
+  RECIPE: 'recipe',
   THEME: 'theme',
 };
-
-const SINGLEDATA: RecipeType[] = Array(10)
-  .fill('')
-  .map((_, idx) => ({
-    id: idx,
-    title: '굴소스 계란볶음밥',
-    isSaved: Boolean(Math.round(Math.random())),
-    image: '/assets/SmallCardDummy.png',
-  }));
-
-const THEMEDATA: ThemeType[] = Array(20)
-  .fill('')
-  .map((_, idx) => ({
-    id: idx,
-    title: '테마 이름',
-    isSaved: Boolean(Math.round(Math.random())),
-    image: '/assets/LargeCardDummy.png',
-    dayCount: Math.round(Math.random() * 3),
-    recipeNum: Math.round(Math.random() * 5),
-  }));
 
 const MyPage = () => {
   const { isLoading, error, data } = useQuery(['UserInfo'], getUserInfo);
 
-  const [category, setCategory] = useState(CATEGORY.SINGLE);
+  const [category, setCategory] = useState(CATEGORY.RECIPE);
   const [nickname, setNickname] = useState('');
 
   useEffect(() => {
@@ -45,6 +25,10 @@ const MyPage = () => {
   }, []);
 
   const { push } = useRouter();
+
+  if (isLoading) {
+    return <div>loading</div>;
+  }
 
   if (error) {
     alert(error);
@@ -65,8 +49,8 @@ const MyPage = () => {
         </div>
         <div className="mt-6 flex items-center justify-center gap-6">
           <p
-            className={category === CATEGORY.SINGLE ? ActiveTab : InactiveTab}
-            onClick={() => setCategory(CATEGORY.SINGLE)}>
+            className={category === CATEGORY.RECIPE ? ActiveTab : InactiveTab}
+            onClick={() => setCategory(CATEGORY.RECIPE)}>
             개별레시피
           </p>
           <p
@@ -78,43 +62,44 @@ const MyPage = () => {
 
         <div className="mt-6 mb-3 w-full">
           <div className="flex h-7 w-28 items-center justify-center rounded-lg bg-[#FFEEE3]">
-            {category === CATEGORY.SINGLE && (
-              <p className="text-xs font-semibold text-[#FE8C46]">{SINGLEDATA.length}개의 개별 레시피</p>
+            {category === CATEGORY.RECIPE && (
+              <p className="text-xs font-semibold text-[#FE8C46]">{data.saved_recipes.length || 0}개의 개별 레시피</p>
             )}
 
             {category === CATEGORY.THEME && (
-              <p className="text-xs font-semibold text-[#FE8C46]">{THEMEDATA.length}개의 테마 레시피</p>
+              <p className="text-xs font-semibold text-[#FE8C46]">{data.saved_themes.length || 0}개의 테마 레시피</p>
             )}
           </div>
         </div>
 
-        {category === CATEGORY.SINGLE && (
-          <div className="flex h-full w-full flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
+        {/* TO BE FIXED: CHANGE FLEX TO GRID */}
+        {category === CATEGORY.RECIPE && (
+          <div className="flex h-full w-full flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
             {isLoading &&
               Array(10)
                 .fill('')
                 .map((_, idx) => <LoadingSmallCard key={idx} />)}
-            {SINGLEDATA.map((data) => (
-              <SmallCard key={data.id} id={data.id} title={data.title} isSaved={data.isSaved} image={data.image} />
+            {data.saved_recipes.map((recipe: RecipeType) => (
+              <SmallCard key={recipe.id} id={recipe.id} title={recipe.title} image={'/assets/SmallCardDummy.png'} />
             ))}
           </div>
         )}
 
         {category === CATEGORY.THEME && (
-          <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
-            {isLoading &&
-              Array(10)
-                .fill('')
-                .map((_, idx) => <LoadingLargeCard key={idx} />)}
-            {THEMEDATA.map((data) => (
+          <div className="flex h-full w-full flex-col items-center gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
+            {data.saved_themes.map((theme: ThemeType) => (
               <LargeCard
-                key={data.id}
-                id={data.id}
-                title={data.title}
-                isSaved={data.isSaved}
-                image={data.image}
-                dayCount={data.dayCount}
-                recipeNum={data.recipeNum}
+                key={theme.id}
+                id={theme.id}
+                title={theme.title}
+                image={theme.image}
+                description={theme.description}
+                duration={theme.duration}
+                save_count={theme.save_count}
+                theme_type={theme.theme_type}
+                recipe_count={theme.recipe_count}
+                recipes={theme.recipes}
+                tips={theme.tips}
               />
             ))}
           </div>
@@ -124,6 +109,16 @@ const MyPage = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['themes'], getUserInfo);
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export const ActiveTab = 'font-extrabold text-lg';
 export const InactiveTab = 'font-extrabold text-lg text-[#B3B3B3]';

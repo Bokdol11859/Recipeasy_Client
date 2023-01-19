@@ -1,6 +1,5 @@
 import ThemeType from '@src/types/ThemeType';
 import { LargeCard, LoadingLargeCard } from '../global/Cards';
-import { useEffect, useState } from 'react';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { getThemeList } from '@src/api/fetcher';
 
@@ -17,27 +16,33 @@ const AllTheme = () => {
         <h1 className="text-2xl font-bold">오늘의 레시피지</h1>
         <h1 className="text-2xl font-bold">추천 테마는?</h1>
       </div>
-      <div className="flex h-full w-full flex-col items-center justify-start gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
-        {isLoading
-          ? Array(10)
-              .fill('')
-              .map((_, idx) => <LoadingLargeCard key={idx} />)
-          : data.Themes.map((theme: ThemeType) => (
-              <LargeCard
-                key={theme.id}
-                id={theme.id}
-                title={theme.title}
-                image={theme.image}
-                description={theme.description}
-                duration={theme.duration}
-                save_count={theme.save_count}
-                theme_type={theme.theme_type}
-                recipe_count={theme.recipe_count}
-                recipes={theme.recipes}
-                tips={theme.tips}
-              />
+      {isLoading ? (
+        <div className="flex w-full flex-col items-center justify-start gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
+          {Array(10)
+            .fill('')
+            .map((_, idx) => (
+              <LoadingLargeCard key={idx} />
             ))}
-      </div>
+        </div>
+      ) : (
+        <div className="flex h-full w-full flex-col items-center justify-start gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
+          {data.Themes.map((theme: ThemeType) => (
+            <LargeCard
+              key={theme.id}
+              id={theme.id}
+              title={theme.title}
+              image={theme.image}
+              description={theme.description}
+              duration={theme.duration}
+              save_count={theme.save_count}
+              theme_type={theme.theme_type}
+              recipe_count={theme.recipe_count}
+              recipes={theme.recipes}
+              tips={theme.tips}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };

@@ -50,28 +50,33 @@ const SpecificTheme = () => {
           {data['Theme Types'][1].title}
         </div>
       </div>
-
-      <div className="flex h-full w-full flex-col justify-start gap-y-4 overflow-y-scroll pb-80 pt-5 scrollbar-hide">
-        {isLoading
-          ? Array(10)
-              .fill('')
-              .map((_, idx) => <LoadingLongLargeCard key={idx} />)
-          : themeData.map((theme: ThemeType) => (
-              <LongLargeCard
-                key={theme.id}
-                id={theme.id}
-                title={theme.title}
-                image={theme.image}
-                description={theme.description}
-                duration={theme.duration}
-                save_count={theme.save_count}
-                theme_type={theme.theme_type}
-                recipe_count={theme.recipe_count}
-                recipes={theme.recipes}
-                tips={theme.tips}
-              />
+      {isLoading ? (
+        <div className="flex h-full w-full flex-col justify-start gap-y-4 overflow-y-scroll pb-80 pt-5 scrollbar-hide">
+          {Array(10)
+            .fill('')
+            .map((_, idx) => (
+              <LoadingLongLargeCard key={idx} />
             ))}
-      </div>
+        </div>
+      ) : (
+        <div className="flex h-full w-full flex-col justify-start gap-y-4 overflow-y-scroll pb-80 pt-5 scrollbar-hide">
+          {themeData.map((theme: ThemeType) => (
+            <LongLargeCard
+              key={theme.id}
+              id={theme.id}
+              title={theme.title}
+              image={theme.image}
+              description={theme.description}
+              duration={theme.duration}
+              save_count={theme.save_count}
+              theme_type={theme.theme_type}
+              recipe_count={theme.recipe_count}
+              recipes={theme.recipes}
+              tips={theme.tips}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };
@@ -87,8 +92,8 @@ export async function getServerSideProps() {
 }
 
 const ActiveTheme =
-  'flex items-center justify-center bg-[#FE8C46] rounded-lg w-fit px-4 h-10 text-white font-semibold text-sm';
+  'flex items-center justify-center bg-[#FE8C46] rounded-lg w-fit px-4 py-2 text-white font-semibold text-sm';
 const InactiveTheme =
-  'flex items-center justify-center bg-[#F3F2F2] rounded-lg w-fit px-4 h-10 text-[#B3B3B3] font-semibold text-sm';
+  'flex items-center justify-center bg-[#F3F2F2] rounded-lg w-fit px-4 py-2 text-[#B3B3B3] font-semibold text-sm';
 
 export default SpecificTheme;
