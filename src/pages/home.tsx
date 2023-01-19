@@ -3,18 +3,8 @@ import GNB from '../components/global/GNB';
 import { ActiveTab, InactiveTab } from './mypage';
 import AllTheme from '@src/components/home/AllTheme';
 import SpecificTheme from '@src/components/home/SpecificTheme';
-import ThemeType from '@src/types/ThemeType';
-
-const THEMEDATA: ThemeType[] = Array(20)
-  .fill('')
-  .map((_, idx) => ({
-    id: idx,
-    title: '테마 이름',
-    isSaved: Boolean(Math.round(Math.random())),
-    image: '/assets/LargeCardDummy.png',
-    dayCount: Math.round(Math.random() * 3),
-    recipeNum: Math.round(Math.random() * 5),
-  }));
+import { useQuery } from '@tanstack/react-query';
+import { getThemeList } from '@src/api/fetcher';
 
 const SPECIFICDATA = [
   {
@@ -77,8 +67,8 @@ const Home = () => {
             {category === CATEGORY.THEME && <div className="h-[2px] w-full bg-black" />}
           </p>
         </div>
-        {category === CATEGORY.ALL && <AllTheme data={THEMEDATA} />}
-        {category === CATEGORY.THEME && <SpecificTheme data={SPECIFICDATA} />}
+        {category === CATEGORY.ALL && <AllTheme />}
+        {category === CATEGORY.THEME && <SpecificTheme />}
       </div>
       <GNB />
     </>
