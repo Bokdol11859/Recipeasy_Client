@@ -1,8 +1,12 @@
 interface RecipeType {
   id: number;
+  video: string;
   title: string;
+  time_taken: string;
   image: string;
-  isSaved: boolean;
+  save_count: number;
+  theme: number;
+  required_ingredients: { name: string }[];
 }
 
 export default RecipeType;
