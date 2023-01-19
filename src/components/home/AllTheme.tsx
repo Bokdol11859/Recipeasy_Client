@@ -1,19 +1,15 @@
 import ThemeType from '@src/types/ThemeType';
 import { LargeCard, LoadingLargeCard } from '../global/Cards';
 import { useEffect, useState } from 'react';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+import { getThemeList } from '@src/api/fetcher';
 
-const AllTheme = ({ data }: any) => {
-  const [isLoading, setIsLoading] = useState(true);
+const AllTheme = () => {
+  const { data, isLoading, error } = useQuery(['themes'], getThemeList);
 
-  useEffect(() => {
-    const loading = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => {
-      clearTimeout(loading);
-    };
-  }, []);
+  if (error) {
+    return <div>Error has occurred</div>;
+  }
 
   return (
     <>
@@ -21,25 +17,39 @@ const AllTheme = ({ data }: any) => {
         <h1 className="text-2xl font-bold">오늘의 레시피지</h1>
         <h1 className="text-2xl font-bold">추천 테마는?</h1>
       </div>
-      <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
-        {isLoading &&
-          Array(10)
-            .fill('')
-            .map((_, idx) => <LoadingLargeCard key={idx} />)}
-        {data.map((theme: ThemeType) => (
-          <LargeCard
-            key={theme.id}
-            id={theme.id}
-            title={theme.title}
-            isSaved={theme.isSaved}
-            image={theme.image}
-            dayCount={theme.dayCount}
-            recipeNum={theme.recipeNum}
-          />
-        ))}
+      <div className="flex h-full w-full flex-col items-center justify-start gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
+        {isLoading
+          ? Array(10)
+              .fill('')
+              .map((_, idx) => <LoadingLargeCard key={idx} />)
+          : data.Themes.map((theme: ThemeType) => (
+              <LargeCard
+                key={theme.id}
+                id={theme.id}
+                title={theme.title}
+                image={theme.image}
+                description={theme.description}
+                duration={theme.duration}
+                save_count={theme.save_count}
+                theme_type={theme.theme_type}
+                recipe_count={theme.recipe_count}
+                recipes={theme.recipes}
+                tips={theme.tips}
+              />
+            ))}
       </div>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['themes'], getThemeList);
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export default AllTheme;
