@@ -32,13 +32,8 @@ const AllTheme = () => {
               id={theme.id}
               title={theme.title}
               image={theme.image}
-              description={theme.description}
               duration={theme.duration}
-              save_count={theme.save_count}
-              theme_type={theme.theme_type}
               recipe_count={theme.recipe_count}
-              recipes={theme.recipes}
-              tips={theme.tips}
             />
           ))}
         </div>
