@@ -3,7 +3,7 @@ import GNB from '../components/global/GNB';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '@src/api/fetcher';
 import { SettingIcon } from '@src/components/icons/SystemIcons';
-import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '@src/components/global/Cards';
+import { LargeCard, LoadingSmallCard, SmallCard } from '@src/components/global/Cards';
 import { useRouter } from 'next/router';
 import RecipeType from '@src/types/RecipeType';
 import ThemeType from '@src/types/ThemeType';
@@ -25,10 +25,6 @@ const MyPage = () => {
   }, []);
 
   const { push } = useRouter();
-
-  if (isLoading) {
-    return <div>loading</div>;
-  }
 
   if (error) {
     alert(error);
@@ -63,25 +59,24 @@ const MyPage = () => {
         <div className="mt-6 mb-3 w-full">
           <div className="flex h-7 w-28 items-center justify-center rounded-lg bg-[#FFEEE3]">
             {category === CATEGORY.RECIPE && (
-              <p className="text-xs font-semibold text-[#FE8C46]">{data.saved_recipes.length || 0}개의 개별 레시피</p>
+              <p className="text-xs font-semibold text-[#FE8C46]">{data?.saved_recipes.length || 0}개의 개별 레시피</p>
             )}
 
             {category === CATEGORY.THEME && (
-              <p className="text-xs font-semibold text-[#FE8C46]">{data.saved_themes.length || 0}개의 테마 레시피</p>
+              <p className="text-xs font-semibold text-[#FE8C46]">{data?.saved_themes.length || 0}개의 테마 레시피</p>
             )}
           </div>
         </div>
 
-        {/* TO BE FIXED: CHANGE FLEX TO GRID */}
         {category === CATEGORY.RECIPE && (
-          <div className="flex h-full w-full flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
-            {isLoading &&
-              Array(10)
-                .fill('')
-                .map((_, idx) => <LoadingSmallCard key={idx} />)}
-            {data.saved_recipes.map((recipe: RecipeType) => (
-              <SmallCard key={recipe.id} id={recipe.id} title={recipe.title} image={'/assets/SmallCardDummy.png'} />
-            ))}
+          <div className="grid h-full grid-cols-2 justify-items-center gap-x-2 gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
+            {isLoading
+              ? Array(10)
+                  .fill('')
+                  .map((_, idx) => <LoadingSmallCard key={idx} />)
+              : data.saved_recipes.map((recipe: RecipeType) => (
+                  <SmallCard key={recipe.id} id={recipe.id} title={recipe.title} image={'/assets/SmallCardDummy.png'} />
+                ))}
           </div>
         )}
 
@@ -93,13 +88,8 @@ const MyPage = () => {
                 id={theme.id}
                 title={theme.title}
                 image={theme.image}
-                description={theme.description}
                 duration={theme.duration}
-                save_count={theme.save_count}
-                theme_type={theme.theme_type}
                 recipe_count={theme.recipe_count}
-                recipes={theme.recipes}
-                tips={theme.tips}
               />
             ))}
           </div>

@@ -2,9 +2,9 @@ import RecipeType from '@src/types/RecipeType';
 import { SaveIcon } from '../icons/SystemIcons';
 import ThemeType from '@src/types/ThemeType';
 
-export const SmallCard = ({ id, title, image }: RecipeType) => (
+export const SmallCard = ({ id, title, image }: { id: number; title: string; image: string }) => (
   <div className="relative flex flex-col">
-    <img className="h-[260px] w-[42vw] max-w-[185px] rounded-xl" src={image} alt={title} />
+    <img className="h-[260px] w-[42vw] max-w-[195px] rounded-xl" src={image} alt={title} />
     <div className="absolute bottom-8 right-2">
       <SaveIcon onClick={() => {}} isActive={true} />
     </div>
@@ -15,12 +15,24 @@ export const SmallCard = ({ id, title, image }: RecipeType) => (
 
 export const LoadingSmallCard = () => (
   <div className="relative flex flex-col">
-    <div className="h-[260px] w-[42vw] max-w-[185px] animate-pulse rounded-xl bg-gray-300" />
-    <div className="mt-1 h-4 w-full animate-pulse rounded-full bg-gray-300"></div>
+    <div className="h-[260px] w-[42vw] max-w-[195px] animate-pulse rounded-xl bg-gray-300" />
+    <div className="mt-1 h-4 w-[75%] animate-pulse rounded-full bg-gray-300"></div>
   </div>
 );
 
-export const LargeCard = ({ title, image, duration, recipe_count }: ThemeType) => (
+export const LargeCard = ({
+  id,
+  title,
+  image,
+  duration,
+  recipe_count,
+}: {
+  id: number;
+  title: string;
+  image: string;
+  duration: number;
+  recipe_count: number;
+}) => (
   <div className="relative h-60 w-full max-w-[400px]">
     <img className="h-full w-full rounded-3xl brightness-50" src={'/assets/LargeCardDummy.png'} alt={title} />
     <div className="absolute bottom-6 left-0 flex w-full flex-col px-6">
@@ -47,7 +59,19 @@ export const LoadingLargeCard = () => (
   </div>
 );
 
-export const LongLargeCard = ({ title, image, duration, recipe_count }: ThemeType) => (
+export const LongLargeCard = ({
+  id,
+  title,
+  image,
+  duration,
+  recipe_count,
+}: {
+  id: number;
+  title: string;
+  image: string;
+  duration: number;
+  recipe_count: number;
+}) => (
   <div className="relative h-[424px] w-full max-w-[400px]">
     <img className="h-full w-full rounded-3xl brightness-50" src={'/assets/LongLargeCardDummy.png'} alt={title} />
     <div className="absolute bottom-6 left-0 flex w-full flex-col px-6">
