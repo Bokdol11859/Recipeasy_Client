@@ -65,7 +65,7 @@ const SpecificTheme = () => {
               key={theme.id}
               id={theme.id}
               title={theme.title}
-              image={theme.image}
+              image={theme.portrait_image}
               duration={theme.duration}
               recipe_count={theme.recipe_count}
             />

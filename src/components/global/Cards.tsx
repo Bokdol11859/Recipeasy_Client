@@ -1,10 +1,17 @@
 import RecipeType from '@src/types/RecipeType';
 import { SaveIcon } from '../icons/SystemIcons';
 import ThemeType from '@src/types/ThemeType';
+import Image from 'next/image';
 
 export const SmallCard = ({ id, title, image }: { id: number; title: string; image: string }) => (
   <div className="relative flex flex-col">
-    <img className="h-[260px] w-[42vw] max-w-[195px] rounded-xl" src={image} alt={title} />
+    <img
+      width={250}
+      height={400}
+      className="h-[260px] w-[42vw] max-w-[195px] rounded-xl"
+      src={'assets/SmallCardDummy.png'}
+      alt={title}
+    />
     <div className="absolute bottom-8 right-2">
       <SaveIcon onClick={() => {}} isActive={true} />
     </div>
@@ -34,7 +41,14 @@ export const LargeCard = ({
   recipe_count: number;
 }) => (
   <div className="relative h-60 w-full max-w-[400px]">
-    <img className="h-full w-full rounded-3xl brightness-50" src={'/assets/LargeCardDummy.png'} alt={title} />
+    <Image
+      priority
+      width={400}
+      height={300}
+      className="h-full w-full rounded-3xl brightness-50"
+      src={image}
+      alt={title}
+    />
     <div className="absolute bottom-6 left-0 flex w-full flex-col px-6">
       <h1 className="text-xl font-bold text-white">{title}</h1>
       <div className="flex items-center justify-between">
@@ -73,7 +87,14 @@ export const LongLargeCard = ({
   recipe_count: number;
 }) => (
   <div className="relative h-[424px] w-full max-w-[400px]">
-    <img className="h-full w-full rounded-3xl brightness-50" src={'/assets/LongLargeCardDummy.png'} alt={title} />
+    <Image
+      priority
+      width={400}
+      height={800}
+      className="h-full w-full rounded-3xl brightness-50"
+      src={image}
+      alt={title}
+    />
     <div className="absolute bottom-6 left-0 flex w-full flex-col px-6">
       <h1 className="text-xl font-bold text-white">{title}</h1>
       <div className="flex items-center justify-between">

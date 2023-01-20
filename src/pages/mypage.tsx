@@ -87,7 +87,7 @@ const MyPage = () => {
                 key={theme.id}
                 id={theme.id}
                 title={theme.title}
-                image={theme.image}
+                image={theme.landscape_image}
                 duration={theme.duration}
                 recipe_count={theme.recipe_count}
               />
