@@ -18,7 +18,6 @@ export const AxiosPrivate = axios.create({
 AxiosPrivate.interceptors.request.use(async (req) => {
   const res = await refreshTokens();
   if (!res) {
-    alert('로그인 만료');
     window.location.href = '/';
   }
   const access = localStorage.getItem('access');

@@ -5,7 +5,7 @@ const SearchTags = ({
   text,
   isIcon = false,
 }: {
-  onClick: Dispatch<SetStateAction<string>>;
+  onClick: (param: string) => void;
   text: string;
   isIcon?: boolean;
 }) => {

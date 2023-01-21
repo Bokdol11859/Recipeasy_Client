@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import GNB from '../components/global/GNB';
 import { BackArrowIcon, SearchIcon } from '@src/components/icons/SystemIcons';
 import SearchTags from '@src/components/search/SearchSuggestion';
@@ -7,13 +7,18 @@ import SearchResult from '@src/components/search/SearchResult';
 import useDebounce from '@src/hooks/useDebounce';
 
 const Search = () => {
+  // FIXME: Set input, query to global state using redux/recoil
+  const [input, setInput] = useState('');
   const [query, setQuery] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+    setInput(e.target.value);
   };
 
-  const debouncedQuery = useDebounce(query);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setQuery(input);
+  };
 
   return (
     <>
@@ -24,26 +29,38 @@ const Search = () => {
               <BackArrowIcon
                 onClick={() => {
                   setQuery('');
+                  setInput('');
                 }}
               />
             </div>
           )}
-          <input
-            className={
-              'relative h-full flex-grow rounded-lg bg-[#F3F2F2] text-sm font-medium text-black ' +
-              (query.length === 0 ? 'px-10' : 'px-4')
-            }
-            placeholder="재료 검색어를 입력해주세요"
-            value={query}
-            onChange={handleChange}
-          />
-          {query.length === 0 && (
-            <div className="absolute top-8 left-8">
-              <SearchIcon />
-            </div>
-          )}
+          <form className="h-full flex-grow" onSubmit={handleSubmit}>
+            <input
+              className={
+                'relative h-full w-full rounded-lg bg-[#F3F2F2] text-sm font-medium text-black ' +
+                `${query.length === 0 ? 'px-10' : 'px-4'}`
+              }
+              placeholder="재료 검색어를 입력해주세요"
+              value={input}
+              onChange={handleChange}
+            />
+            {query.length === 0 && (
+              <div className="absolute top-8 left-8">
+                <SearchIcon />
+              </div>
+            )}
+          </form>
         </div>
-        {query.length === 0 ? <SearchSuggestion onClick={setQuery} /> : <SearchResult query={debouncedQuery} />}
+        {query.length === 0 ? (
+          <SearchSuggestion
+            onClick={(param) => {
+              setInput(param);
+              setQuery(param);
+            }}
+          />
+        ) : (
+          <SearchResult query={query} />
+        )}
       </div>
       <GNB />
     </>

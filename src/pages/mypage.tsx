@@ -68,6 +68,7 @@ const MyPage = () => {
           </div>
         </div>
 
+        {/* FIXME: fix grid issue with h-full property */}
         {category === CATEGORY.RECIPE && (
           <div className="grid h-full grid-cols-2 justify-items-center gap-x-2 gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
             {isLoading

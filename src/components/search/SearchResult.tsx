@@ -1,46 +1,26 @@
 import RecipeType from '@src/types/RecipeType';
 import ThemeType from '@src/types/ThemeType';
 import React, { useEffect, useState } from 'react';
-import { LargeCard, SmallCard } from '../global/Cards';
+import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '../global/Cards';
 import { useQuery } from '@tanstack/react-query';
 import { queryRecipeList, queryThemeList } from '@src/api/fetcher';
 
 const CATEGORY = {
-  SINGLE: 'single',
+  RECIPE: 'recipe',
   THEME: 'theme',
 };
 
-const TITLE = ['굴소스 계란볶음밥', '마약 김치찌개'];
-
-const SINGLEDATA: RecipeType[] = Array(10)
-  .fill('')
-  .map((_, idx) => ({
-    id: idx,
-    title: TITLE[Math.round(Math.random())],
-    isSaved: Boolean(Math.round(Math.random())),
-    image: '/assets/SmallCardDummy.png',
-  }));
-
-const THEMEDATA: ThemeType[] = Array(20)
-  .fill('')
-  .map((_, idx) => ({
-    id: idx,
-    title: '테마 이름',
-    isSaved: Boolean(Math.round(Math.random())),
-    image: '/assets/LargeCardDummy.png',
-    dayCount: Math.round(Math.random() * 3),
-    recipeNum: Math.round(Math.random() * 5),
-  }));
-
 const SearchResult = ({ query }: { query: string }) => {
-  const [category, setCategory] = useState(CATEGORY.SINGLE);
+  const [category, setCategory] = useState(CATEGORY.RECIPE);
+  // const themeQuery = useQuery(['searched_themes', query], () => queryThemeList(query));
+  const recipeQuery = useQuery(['searched_recipes', query], () => queryRecipeList(query));
 
   return (
     <>
       <div className="my-6 flex items-center justify-center gap-6 ">
         <p
-          className={category === CATEGORY.SINGLE ? ActiveTab : InactiveTab}
-          onClick={() => setCategory(CATEGORY.SINGLE)}>
+          className={category === CATEGORY.RECIPE ? ActiveTab : InactiveTab}
+          onClick={() => setCategory(CATEGORY.RECIPE)}>
           개별레시피
         </p>
         <p
@@ -50,29 +30,42 @@ const SearchResult = ({ query }: { query: string }) => {
         </p>
       </div>
 
-      {category === CATEGORY.SINGLE && (
-        <div className="flex h-full w-full flex-wrap items-center justify-between gap-x-1 gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
-          {SINGLEDATA.filter((data) => data.title.includes(query)).map((data) => (
-            <SmallCard key={data.id} id={data.id} title={data.title} isSaved={data.isSaved} image={data.image} />
-          ))}
+      {/* FIXME: fix grid issue with h-full property */}
+      {category === CATEGORY.RECIPE && (
+        <div className="grid h-full grid-cols-2 justify-items-center gap-x-2 gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
+          {recipeQuery.isLoading
+            ? Array(10)
+                .fill('')
+                .map((_, idx) => <LoadingSmallCard key={idx} />)
+            : recipeQuery.data.map((recipe: RecipeType) => (
+                <SmallCard key={recipe.id} id={recipe.id} title={recipe.title} image={'/assets/SmallCardDummy.png'} />
+              ))}
         </div>
       )}
 
-      {category === CATEGORY.THEME && (
-        <div className="flex h-full w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
-          {THEMEDATA.map((data) => (
-            <LargeCard
-              key={data.id}
-              id={data.id}
-              title={data.title}
-              isSaved={data.isSaved}
-              image={data.image}
-              dayCount={data.dayCount}
-              recipeNum={data.recipeNum}
-            />
-          ))}
-        </div>
-      )}
+      {/* {category === CATEGORY.THEME &&
+        (themeQuery.isLoading ? (
+          <div className="flex w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
+            {Array(10)
+              .fill('')
+              .map((_, idx) => (
+                <LoadingLargeCard key={idx} />
+              ))}
+          </div>
+        ) : (
+          <div className="flex w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
+            {themeQuery.data.map((theme: ThemeType) => (
+              <LargeCard
+                key={theme.id}
+                id={theme.id}
+                title={theme.title}
+                image={theme.landscape_image}
+                duration={theme.duration}
+                recipe_count={theme.recipe_count}
+              />
+            ))}
+          </div>
+        ))} */}
     </>
   );
 };
