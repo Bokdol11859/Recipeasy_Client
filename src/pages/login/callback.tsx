@@ -14,7 +14,9 @@ interface GetUserResponse {
 const Callback = () => {
   const { query, isReady, push } = useRouter();
   const getData = useCallback(async () => {
-    const res = await AxiosPublic.get<GetUserResponse>(`auth/kakao?code=${query.code}`);
+    const res = await AxiosPublic.get<GetUserResponse>(`auth/kakao?code=${query.code}`, {
+      params: { redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI },
+    });
 
     localStorage.setItem('access', res.data.access);
     localStorage.setItem('refresh', res.data.refresh);
