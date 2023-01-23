@@ -17,12 +17,6 @@ const MyPage = () => {
   const { isLoading, error, data } = useQuery(['UserInfo'], getUserInfo);
 
   const [category, setCategory] = useState(CATEGORY.RECIPE);
-  const [nickname, setNickname] = useState('');
-
-  useEffect(() => {
-    let temp = localStorage.getItem('nickname');
-    setNickname(temp || '');
-  }, []);
 
   const { push } = useRouter();
 
@@ -41,7 +35,7 @@ const MyPage = () => {
           />
         </div>
         <div className="mt-6 flex items-center justify-between">
-          <p className="text-2xl font-extrabold">{nickname}님</p>
+          <p className="text-2xl font-extrabold">{data?.nickname}님</p>
         </div>
         <div className="mt-6 flex items-center justify-center gap-6">
           <p
