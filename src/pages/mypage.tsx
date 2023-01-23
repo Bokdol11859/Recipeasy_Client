@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GNB from '../components/global/GNB';
-import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { getUserInfo } from '@src/api/fetcher';
+import { QueryClient, dehydrate, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getUserInfo, saveRecipe, saveTheme } from '@src/api/fetcher';
 import { SettingIcon } from '@src/components/icons/SystemIcons';
 import { LargeCard, LoadingSmallCard, SmallCard } from '@src/components/global/Cards';
 import { useRouter } from 'next/router';
