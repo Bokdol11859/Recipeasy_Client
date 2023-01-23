@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react';
 import { LoadingLongLargeCard, LongLargeCard } from '../global/Cards';
 import ThemeType from '@src/types/ThemeType';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { getThemeList } from '@src/api/fetcher';
+import { getThemeList, getUserInfo } from '@src/api/fetcher';
 
 const SpecificTheme = () => {
   const { data, isLoading, error } = useQuery(['themes'], getThemeList);
+  const userInfo = useQuery(['UserInfo'], getUserInfo);
+
+  const isSavedTheme = (id: number) => {
+    return userInfo.data.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
+  };
 
   const [theme, setTheme] = useState(0);
   const [themeData, setThemeData] = useState([]);
@@ -68,6 +73,7 @@ const SpecificTheme = () => {
               image={theme.portrait_image}
               duration={theme.duration}
               recipe_count={theme.recipe_count}
+              isSaved={isSavedTheme(theme.id)}
             />
           ))}
         </div>

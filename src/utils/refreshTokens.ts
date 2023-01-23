@@ -11,7 +11,7 @@ const refreshTokens = async () => {
     localStorage.setItem('access', response.data.access);
     return true;
   } catch {
-    localStorage.clear();
+    // localStorage.clear();
     return false;
   }
 };

@@ -3,7 +3,7 @@ import ThemeType from '@src/types/ThemeType';
 import React, { useEffect, useState } from 'react';
 import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '../global/Cards';
 import { useQuery } from '@tanstack/react-query';
-import { queryRecipeList, queryThemeList } from '@src/api/fetcher';
+import { getUserInfo, queryRecipeList, queryThemeList } from '@src/api/fetcher';
 
 const CATEGORY = {
   RECIPE: 'recipe',
@@ -12,12 +12,22 @@ const CATEGORY = {
 
 const SearchResult = ({ query }: { query: string }) => {
   const [category, setCategory] = useState(CATEGORY.RECIPE);
+
+  const userInfo = useQuery(['UserInfo'], getUserInfo);
   const themeQuery = useQuery(['searched_themes', query], () => queryThemeList(query), {
     enabled: category === CATEGORY.THEME,
   });
   const recipeQuery = useQuery(['searched_recipes', query], () => queryRecipeList(query), {
     enabled: category === CATEGORY.RECIPE,
   });
+
+  const isSavedTheme = (id: number) => {
+    return userInfo.data.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
+  };
+
+  const isSavedRecipe = (id: number) => {
+    return userInfo.data.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
+  };
 
   return (
     <>
@@ -42,7 +52,13 @@ const SearchResult = ({ query }: { query: string }) => {
                 .fill('')
                 .map((_, idx) => <LoadingSmallCard key={idx} />)
             : recipeQuery.data.map((recipe: RecipeType) => (
-                <SmallCard key={recipe.id} id={recipe.id} title={recipe.title} image={'/assets/SmallCardDummy.png'} />
+                <SmallCard
+                  key={recipe.id}
+                  id={recipe.id}
+                  title={recipe.title}
+                  image={'/assets/SmallCardDummy.png'}
+                  isSaved={isSavedRecipe(recipe.id)}
+                />
               ))}
         </div>
       )}
@@ -66,6 +82,7 @@ const SearchResult = ({ query }: { query: string }) => {
                 image={theme.landscape_image}
                 duration={theme.duration}
                 recipe_count={theme.recipe_count}
+                isSaved={isSavedTheme(theme.id)}
               />
             ))}
           </div>

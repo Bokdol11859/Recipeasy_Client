@@ -3,39 +3,6 @@ import GNB from '../components/global/GNB';
 import { ActiveTab, InactiveTab } from './mypage';
 import AllTheme from '@src/components/home/AllTheme';
 import SpecificTheme from '@src/components/home/SpecificTheme';
-import { useQuery } from '@tanstack/react-query';
-import { getThemeList } from '@src/api/fetcher';
-
-const SPECIFICDATA = [
-  {
-    id: 1,
-    title: '자취생 초간단',
-    themes: Array(20)
-      .fill('')
-      .map((_, idx) => ({
-        id: idx,
-        title: '테마 이름',
-        isSaved: Boolean(Math.round(Math.random())),
-        image: '/assets/LongLargeCardDummy.png',
-        dayCount: Math.round(Math.random() * 3),
-        recipeNum: Math.round(Math.random() * 5),
-      })),
-  },
-  {
-    id: 2,
-    title: '한가지 재료',
-    themes: Array(20)
-      .fill('')
-      .map((_, idx) => ({
-        id: idx,
-        title: '테마 이름',
-        isSaved: Boolean(Math.round(Math.random())),
-        image: '/assets/LongLargeCardDummy.png',
-        dayCount: Math.round(Math.random() * 3),
-        recipeNum: Math.round(Math.random() * 5),
-      })),
-  },
-];
 
 const CATEGORY = {
   ALL: 'all',

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GNB from '../components/global/GNB';
 import { QueryClient, dehydrate, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getUserInfo, saveRecipe, saveTheme } from '@src/api/fetcher';
+import { getUserInfo } from '@src/api/fetcher';
 import { SettingIcon } from '@src/components/icons/SystemIcons';
 import { LargeCard, LoadingSmallCard, SmallCard } from '@src/components/global/Cards';
 import { useRouter } from 'next/router';
@@ -76,7 +76,13 @@ const MyPage = () => {
                   .fill('')
                   .map((_, idx) => <LoadingSmallCard key={idx} />)
               : data.saved_recipes.map((recipe: RecipeType) => (
-                  <SmallCard key={recipe.id} id={recipe.id} title={recipe.title} image={'/assets/SmallCardDummy.png'} />
+                  <SmallCard
+                    key={recipe.id}
+                    id={recipe.id}
+                    title={recipe.title}
+                    image={'/assets/SmallCardDummy.png'}
+                    isSaved={true}
+                  />
                 ))}
           </div>
         )}
@@ -91,6 +97,7 @@ const MyPage = () => {
                 image={theme.landscape_image}
                 duration={theme.duration}
                 recipe_count={theme.recipe_count}
+                isSaved={true}
               />
             ))}
           </div>

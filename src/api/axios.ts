@@ -18,7 +18,7 @@ export const AxiosPrivate = axios.create({
 AxiosPrivate.interceptors.request.use(async (req) => {
   const res = await refreshTokens();
   if (!res) {
-    window.location.href = '/';
+    // window.location.href = '/';
   }
   const access = localStorage.getItem('access');
   req.headers = {
