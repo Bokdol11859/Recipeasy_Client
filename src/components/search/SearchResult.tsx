@@ -12,8 +12,12 @@ const CATEGORY = {
 
 const SearchResult = ({ query }: { query: string }) => {
   const [category, setCategory] = useState(CATEGORY.RECIPE);
-  // const themeQuery = useQuery(['searched_themes', query], () => queryThemeList(query));
-  const recipeQuery = useQuery(['searched_recipes', query], () => queryRecipeList(query));
+  const themeQuery = useQuery(['searched_themes', query], () => queryThemeList(query), {
+    enabled: category === CATEGORY.THEME,
+  });
+  const recipeQuery = useQuery(['searched_recipes', query], () => queryRecipeList(query), {
+    enabled: category === CATEGORY.RECIPE,
+  });
 
   return (
     <>
@@ -43,7 +47,7 @@ const SearchResult = ({ query }: { query: string }) => {
         </div>
       )}
 
-      {/* {category === CATEGORY.THEME &&
+      {category === CATEGORY.THEME &&
         (themeQuery.isLoading ? (
           <div className="flex w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
             {Array(10)
@@ -65,7 +69,7 @@ const SearchResult = ({ query }: { query: string }) => {
               />
             ))}
           </div>
-        ))} */}
+        ))}
     </>
   );
 };
