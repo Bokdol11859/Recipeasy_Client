@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '../global/Cards';
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo, queryRecipeList, queryThemeList } from '@src/api/fetcher';
+import { IngredientIcon, TimeIcon } from '../icons/SystemIcons';
 
 const CATEGORY = {
   RECIPE: 'recipe',
@@ -52,13 +53,24 @@ const SearchResult = ({ query }: { query: string }) => {
                 .fill('')
                 .map((_, idx) => <LoadingSmallCard key={idx} />)
             : recipeQuery.data.map((recipe: RecipeType) => (
-                <SmallCard
-                  key={recipe.id}
-                  id={recipe.id}
-                  title={recipe.title}
-                  image={recipe.image}
-                  isSaved={isSavedRecipe(recipe.id)}
-                />
+                <div key={recipe.id} className="flex flex-col gap-1">
+                  <SmallCard
+                    id={recipe.id}
+                    title={recipe.title}
+                    image={recipe.image}
+                    isSaved={isSavedRecipe(recipe.id)}
+                  />
+                  <div className="flex items-center gap-1">
+                    <TimeIcon />
+                    <p className="text-xs font-bold">{recipe.time_taken}</p>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <IngredientIcon />
+                    <p className="w-[80%] text-xs font-bold">
+                      {recipe.required_ingredients.map((ingredient) => ingredient.name).join(', ')}
+                    </p>
+                  </div>
+                </div>
               ))}
         </div>
       )}

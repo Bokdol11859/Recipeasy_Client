@@ -27,9 +27,9 @@ export const SmallCard = ({
     <div className="relative flex h-fit flex-col">
       <Image
         priority
-        width={300}
+        width={400}
         height={500}
-        className="h-[260px] w-[42vw] max-w-[195px] rounded-xl"
+        className="h-[280px] w-[44vw] max-w-[195px] rounded-xl bg-cover"
         src={image}
         alt={title}
       />
