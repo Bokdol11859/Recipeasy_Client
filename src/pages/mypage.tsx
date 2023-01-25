@@ -20,6 +20,10 @@ const MyPage = () => {
 
   const { push } = useRouter();
 
+  const handleClick = (id: number) => {
+    push(`theme/${id}`);
+  };
+
   if (error) {
     alert(error);
   }
@@ -86,6 +90,7 @@ const MyPage = () => {
                 duration={theme.duration}
                 recipe_count={theme.recipe_count}
                 isSaved={true}
+                onClick={() => handleClick(theme.id)}
               />
             ))}
           </div>
