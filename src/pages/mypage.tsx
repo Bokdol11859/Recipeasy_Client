@@ -70,13 +70,7 @@ const MyPage = () => {
                   .fill('')
                   .map((_, idx) => <LoadingSmallCard key={idx} />)
               : data.saved_recipes.map((recipe: RecipeType) => (
-                  <SmallCard
-                    key={recipe.id}
-                    id={recipe.id}
-                    title={recipe.title}
-                    image={'/assets/SmallCardDummy.png'}
-                    isSaved={true}
-                  />
+                  <SmallCard key={recipe.id} id={recipe.id} title={recipe.title} image={recipe.image} isSaved={true} />
                 ))}
           </div>
         )}

@@ -56,7 +56,7 @@ const SearchResult = ({ query }: { query: string }) => {
                   key={recipe.id}
                   id={recipe.id}
                   title={recipe.title}
-                  image={'/assets/SmallCardDummy.png'}
+                  image={recipe.image}
                   isSaved={isSavedRecipe(recipe.id)}
                 />
               ))}

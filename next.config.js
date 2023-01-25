@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'recipeasy-data.s3.ap-northeast-2.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'recipeasy-image.s3.ap-northeast-2.amazonaws.com',
+      },
     ],
   },
 };

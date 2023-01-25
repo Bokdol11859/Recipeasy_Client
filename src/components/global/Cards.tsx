@@ -25,11 +25,12 @@ export const SmallCard = ({
 
   return (
     <div className="relative flex h-fit flex-col">
-      <img
-        width={250}
-        height={400}
+      <Image
+        priority
+        width={300}
+        height={500}
         className="h-[260px] w-[42vw] max-w-[195px] rounded-xl"
-        src={'assets/SmallCardDummy.png'}
+        src={image}
         alt={title}
       />
       <div className="absolute bottom-8 right-2">

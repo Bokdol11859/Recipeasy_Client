@@ -12,7 +12,7 @@ const AllTheme = () => {
   }
 
   const isSavedTheme = (id: number) => {
-    return userInfo.data.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
+    return userInfo.data?.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
   };
 
   return (
