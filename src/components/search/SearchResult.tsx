@@ -5,6 +5,7 @@ import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '../glo
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo, queryRecipeList, queryThemeList } from '@src/api/fetcher';
 import { IngredientIcon, TimeIcon } from '../icons/SystemIcons';
+import { useRouter } from 'next/router';
 
 const CATEGORY = {
   RECIPE: 'recipe',
@@ -28,6 +29,12 @@ const SearchResult = ({ query }: { query: string }) => {
 
   const isSavedRecipe = (id: number) => {
     return userInfo.data.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
+  };
+
+  const { push } = useRouter();
+
+  const handleClick = (id: number) => {
+    push(`theme/${id}`);
   };
 
   return (
@@ -95,6 +102,7 @@ const SearchResult = ({ query }: { query: string }) => {
                 duration={theme.duration}
                 recipe_count={theme.recipe_count}
                 isSaved={isSavedTheme(theme.id)}
+                onClick={() => handleClick(theme.id)}
               />
             ))}
           </div>

@@ -29,7 +29,7 @@ export const SmallCard = ({
         priority
         width={400}
         height={500}
-        className="h-[280px] w-[44vw] max-w-[195px] rounded-xl bg-cover"
+        className="h-[270px] w-[43vw] max-w-[195px] rounded-xl bg-cover"
         src={image}
         alt={title}
       />
@@ -44,7 +44,7 @@ export const SmallCard = ({
 
 export const LoadingSmallCard = () => (
   <div className="relative flex flex-col">
-    <div className="h-[260px] w-[42vw] max-w-[195px] animate-pulse rounded-xl bg-gray-300" />
+    <div className="h-[280px] w-[44vw] max-w-[195px] animate-pulse rounded-xl bg-gray-300" />
     <div className="mt-1 ml-1 h-4 w-[75%] animate-pulse bg-gray-300"></div>
   </div>
 );
@@ -56,6 +56,7 @@ export const LargeCard = ({
   duration,
   recipe_count,
   isSaved,
+  onClick,
 }: {
   id: number;
   title: string;
@@ -63,6 +64,7 @@ export const LargeCard = ({
   duration: number;
   recipe_count: number;
   isSaved: boolean;
+  onClick: () => void;
 }) => {
   const queryClient = useQueryClient();
   const themeMutation = useMutation({
@@ -70,7 +72,7 @@ export const LargeCard = ({
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['UserInfo'] }),
   });
   return (
-    <div className="relative h-60 w-full max-w-[400px]">
+    <div className="relative h-60 w-full max-w-[400px]" onClick={onClick}>
       <Image
         priority
         width={400}
@@ -111,6 +113,7 @@ export const LongLargeCard = ({
   duration,
   recipe_count,
   isSaved,
+  onClick,
 }: {
   id: number;
   title: string;
@@ -118,6 +121,7 @@ export const LongLargeCard = ({
   duration: number;
   recipe_count: number;
   isSaved: boolean;
+  onClick: () => void;
 }) => {
   const queryClient = useQueryClient();
   const themeMutation = useMutation({
@@ -125,7 +129,7 @@ export const LongLargeCard = ({
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['UserInfo'] }),
   });
   return (
-    <div className="relative h-[424px] w-full max-w-[400px]">
+    <div className="relative h-[424px] w-full max-w-[400px]" onClick={onClick}>
       <Image
         priority
         width={400}

@@ -30,3 +30,13 @@ export const toggleTheme = async (id: number) => {
   const res = await AxiosPrivate.post(`/theme/${id}`);
   return res.data;
 };
+
+export const getRecipeDetail = async (id: number) => {
+  const res = await AxiosPrivate.get(`/recipes/${id}/`);
+  return res.data;
+};
+
+export const getThemeDetail = async (id: number) => {
+  const res = await AxiosPrivate.get(`/theme/${id}`);
+  return res.data;
+};
