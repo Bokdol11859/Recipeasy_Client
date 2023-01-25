@@ -101,15 +101,15 @@ const MyPage = () => {
   );
 };
 
-export async function getServerSideProps() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(['themes'], getUserInfo);
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const queryClient = new QueryClient();
+//   await queryClient.prefetchQuery(['themes'], getUserInfo);
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// }
 
 export const ActiveTab = 'font-extrabold text-lg';
 export const InactiveTab = 'font-extrabold text-lg text-[#B3B3B3]';
