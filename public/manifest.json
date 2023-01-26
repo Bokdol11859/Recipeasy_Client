@@ -1,0 +1,16 @@
+{
+  "theme_color": "#FE8C46",
+  "background_color": "#FFFFFF",
+  "display": "fullscreen",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Recipeasy",
+  "short_name": "Recipeasy",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
