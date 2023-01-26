@@ -4,9 +4,12 @@ import { SmallCard } from '../global/Cards';
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '@src/api/fetcher';
 import { IngredientIcon, TimeIcon } from '../icons/SystemIcons';
+import { useRouter } from 'next/router';
 
 const RecipeList = ({ recipes }: { recipes: RecipeType[] }) => {
   const userInfo = useQuery(['UserInfo'], getUserInfo);
+
+  const { push } = useRouter();
 
   const isSavedRecipe = (id: number) => {
     return userInfo.data?.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
@@ -16,7 +19,15 @@ const RecipeList = ({ recipes }: { recipes: RecipeType[] }) => {
     <div className="mt-2 mb-14 flex w-full snap-x snap-mandatory gap-3 overflow-x-scroll scrollbar-hide">
       {recipes?.map((recipe: RecipeType) => (
         <div key={recipe.id} className="flex snap-center flex-col gap-1">
-          <SmallCard id={recipe.id} title={recipe.title} image={recipe.image} isSaved={isSavedRecipe(recipe.id)} />
+          <SmallCard
+            id={recipe.id}
+            title={recipe.title}
+            image={recipe.image}
+            isSaved={isSavedRecipe(recipe.id)}
+            onClick={() => {
+              push(`/recipe/${recipe.id}`);
+            }}
+          />
           <div className="flex items-center gap-1">
             <TimeIcon />
             <p className="text-xs font-bold">{recipe.time_taken}</p>

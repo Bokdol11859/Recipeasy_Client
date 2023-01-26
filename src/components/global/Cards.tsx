@@ -10,11 +10,13 @@ export const SmallCard = ({
   title,
   image,
   isSaved,
+  onClick,
 }: {
   id: number;
   title: string;
   image: string;
   isSaved: boolean;
+  onClick: () => void;
 }) => {
   const queryClient = useQueryClient();
 
@@ -24,12 +26,12 @@ export const SmallCard = ({
   });
 
   return (
-    <div className="relative flex h-fit flex-col">
+    <div onClick={onClick} className="relative flex h-fit flex-col">
       <Image
         priority
         width={400}
         height={500}
-        className="h-[270px] w-[43vw] max-w-[195px] rounded-xl bg-cover"
+        className="h-[270px] w-[43vw] max-w-[195px] rounded-xl bg-cover brightness-75"
         src={image}
         alt={title}
       />

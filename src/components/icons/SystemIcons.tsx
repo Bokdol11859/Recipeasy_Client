@@ -48,9 +48,15 @@ export const SaveIcon = ({ onClick, isActive }: { onClick: () => void; isActive:
   </svg>
 );
 
-export const BackArrowIcon = ({ onClick }: { onClick: () => void }) => (
+export const BackArrowIcon = ({ onClick, isWhite = false }: { onClick: () => void; isWhite?: boolean }) => (
   <svg onClick={onClick} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14.5 5L7 12.5L14.5 20" stroke="#120000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M14.5 5L7 12.5L14.5 20"
+      stroke={isWhite ? '#FFFFFF' : '#120000'}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 

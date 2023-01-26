@@ -27,7 +27,6 @@ const ThemeDetail = () => {
     },
   });
 
-  console.log(recipeQuery.data);
   return (
     <div className="h-full w-full overflow-y-scroll scrollbar-hide">
       <div className="px-6">

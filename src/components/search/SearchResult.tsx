@@ -24,11 +24,11 @@ const SearchResult = ({ query }: { query: string }) => {
   });
 
   const isSavedTheme = (id: number) => {
-    return userInfo.data.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
+    return userInfo.data?.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
   };
 
   const isSavedRecipe = (id: number) => {
-    return userInfo.data.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
+    return userInfo.data?.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
   };
 
   const { push } = useRouter();
@@ -66,6 +66,9 @@ const SearchResult = ({ query }: { query: string }) => {
                     title={recipe.title}
                     image={recipe.image}
                     isSaved={isSavedRecipe(recipe.id)}
+                    onClick={() => {
+                      push(`/recipe/${recipe.id}`);
+                    }}
                   />
                   <div className="flex items-center gap-1">
                     <TimeIcon />
