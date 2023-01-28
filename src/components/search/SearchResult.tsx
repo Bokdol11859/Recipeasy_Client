@@ -1,19 +1,17 @@
 import RecipeType from '@src/types/RecipeType';
 import ThemeType from '@src/types/ThemeType';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '../global/Cards';
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo, queryRecipeList, queryThemeList } from '@src/api/fetcher';
 import { IngredientIcon, TimeIcon } from '../icons/SystemIcons';
 import { useRouter } from 'next/router';
-
-const CATEGORY = {
-  RECIPE: 'recipe',
-  THEME: 'theme',
-};
+import { useRecoilState } from 'recoil';
+import categoryState from '@src/atoms/categoryAtom';
+import CATEGORY from '@src/constants/category';
 
 const SearchResult = ({ query }: { query: string }) => {
-  const [category, setCategory] = useState(CATEGORY.RECIPE);
+  const [category, setCategory] = useRecoilState(categoryState);
 
   const userInfo = useQuery(['UserInfo'], getUserInfo);
   const themeQuery = useQuery(['searched_themes', query], () => queryThemeList(query), {

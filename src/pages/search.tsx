@@ -1,15 +1,15 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import GNB from '../components/global/GNB';
 import { BackArrowIcon, SearchIcon } from '@src/components/icons/SystemIcons';
-import SearchTags from '@src/components/search/SearchSuggestion';
 import SearchSuggestion from '@src/components/search/SearchSuggestion';
 import SearchResult from '@src/components/search/SearchResult';
-import useDebounce from '@src/hooks/useDebounce';
+import { useRecoilState } from 'recoil';
+import queryState from '@src/atoms/searchAtom';
 
 const Search = () => {
   // FIXME: Set input, query to global state using redux/recoil
   const [input, setInput] = useState('');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useRecoilState(queryState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -19,6 +19,12 @@ const Search = () => {
     e.preventDefault();
     setQuery(input);
   };
+
+  useEffect(() => {
+    if (query.length > 0) {
+      setInput(query);
+    }
+  }, []);
 
   return (
     <>

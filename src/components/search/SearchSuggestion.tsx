@@ -4,7 +4,7 @@ import SearchTags from './SearchTags';
 const SearchSuggestion = ({ onClick }: { onClick: Dispatch<SetStateAction<string>> }) => {
   const INGREDIENTS = ['계란', '감자'];
 
-  const THEMES = ['자취생 식단', '같은 재료'];
+  const THEMES = ['3일', '5일', '자취생'];
 
   return (
     <div className="flex-grow">
