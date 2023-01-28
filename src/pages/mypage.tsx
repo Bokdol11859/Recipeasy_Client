@@ -32,11 +32,11 @@ const MyPage = () => {
     <>
       <div className="h-full w-full px-6 pt-6">
         <div className="flex w-full items-center justify-end">
-          <SettingIcon
+          {/* <SettingIcon
             onClick={() => {
               push('/settings');
             }}
-          />
+          /> */}
         </div>
         <div className="mt-6 flex items-center justify-between">
           <p className="text-2xl font-extrabold">{data?.nickname}님</p>
