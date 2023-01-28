@@ -58,7 +58,19 @@ const SearchResult = ({ query }: { query: string }) => {
           {recipeQuery.isLoading
             ? Array(10)
                 .fill('')
-                .map((_, idx) => <LoadingSmallCard key={idx} />)
+                .map((_, idx) => (
+                  <div key={idx} className="flex flex-col gap-1">
+                    <LoadingSmallCard />
+                    <div className="flex items-center gap-1">
+                      <TimeIcon />
+                      <div className="mt-1 ml-1 h-4 w-[75%] animate-pulse bg-gray-300" />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <IngredientIcon />
+                      <div className="mt-1 ml-1 h-4 w-[75%] animate-pulse bg-gray-300" />
+                    </div>
+                  </div>
+                ))
             : recipeQuery.data.map((recipe: RecipeType) => (
                 <div key={recipe.id} className="flex flex-col gap-1">
                   <SmallCard
