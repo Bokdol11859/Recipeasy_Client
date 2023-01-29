@@ -4,14 +4,13 @@ import RecipeList from '@src/components/theme/RecipeList';
 import ThemeHeader from '@src/components/theme/ThemeHeader';
 import ThemeType from '@src/types/ThemeType';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 const ThemeDetail = () => {
   const { query } = useRouter();
   const userInfo = useQuery(['UserInfo'], getUserInfo);
-  const recipeQuery = useQuery(['theme', query.id], () => getThemeDetail(Number(query.id)));
+  const themeQuery = useQuery(['theme', query.id], () => getThemeDetail(Number(query.id)));
 
   const isSavedTheme = (id: number) => {
     return userInfo.data?.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
@@ -32,20 +31,20 @@ const ThemeDetail = () => {
       <div className="px-6">
         <Header
           onClick={() => {
-            themeMutation.mutate(recipeQuery.data?.theme.id);
+            themeMutation.mutate(themeQuery.data?.theme.id);
           }}
-          isActive={isSavedTheme(recipeQuery.data?.theme.id)}
-          saveCount={recipeQuery.data?.theme.save_count}
+          isActive={isSavedTheme(themeQuery.data?.theme.id)}
+          saveCount={themeQuery.data?.theme.save_count}
         />
         <ThemeHeader
-          title={recipeQuery.data?.theme.title}
-          themeType={recipeQuery.data?.theme_type_name}
-          recipeCount={recipeQuery.data?.theme.recipe_count}
-          duration={recipeQuery.data?.theme.duration}
+          title={themeQuery.data?.theme.title}
+          themeType={themeQuery.data?.theme_type_name}
+          recipeCount={themeQuery.data?.theme.recipe_count}
+          duration={themeQuery.data?.theme.duration}
         />
-        <RecipeList recipes={recipeQuery.data?.theme.recipes} />
+        <RecipeList recipes={themeQuery.data?.theme.recipes} />
       </div>
-      <img src={recipeQuery.data?.theme.tips} />
+      <img src={themeQuery.data?.theme.tips} />
     </div>
   );
 };

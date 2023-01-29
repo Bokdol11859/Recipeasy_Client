@@ -25,6 +25,10 @@ const RecipeVideo = () => {
     },
   });
 
+  const handleClick = (id: number) => {
+    push(`/recipe/detail/${id}`);
+  };
+
   return (
     <div className="relative flex h-full w-full flex-col justify-between bg-black">
       <div className="z-10 flex h-36 w-full flex-col px-6 text-white">
@@ -52,7 +56,9 @@ const RecipeVideo = () => {
       )}
 
       <div className="z-10 flex h-24 w-full items-center justify-center gap-5 bg-black pb-4">
-        <div className="flex h-12 w-36 items-center justify-center rounded-[30px] bg-[#FE8C46] text-base font-medium text-white">
+        <div
+          onClick={() => handleClick(Number(query.id))}
+          className="flex h-12 w-36 items-center justify-center rounded-[30px] bg-[#FE8C46] text-base font-medium text-white">
           자세히 보기
         </div>
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
