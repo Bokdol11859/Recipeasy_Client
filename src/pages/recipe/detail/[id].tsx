@@ -1,6 +1,8 @@
 import { getRecipeDetail, getUserInfo, toggleRecipe } from '@src/api/fetcher';
 import Header from '@src/components/global/Header';
+import RecipeBody from '@src/components/recipe/RecipeBody';
 import RecipeHeader from '@src/components/recipe/RecipeHeader';
+import RecipeSteps from '@src/components/recipe/RecipeSteps';
 import RecipeType from '@src/types/RecipeType';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -40,6 +42,13 @@ const RecipeDetail = () => {
         difficulty={recipeQuery.data?.data.difficulty}
         duration={recipeQuery.data?.data.time_taken}
       />
+      <RecipeBody
+        required_ingredients={recipeQuery.data?.data.required_ingredients}
+        additional_ingredients={recipeQuery.data?.data.additional_ingredients}
+        equipment={recipeQuery.data?.data.equipment}
+      />
+      <div className="h-3 w-full bg-[#FBF9F6]" />
+      <RecipeSteps />
     </div>
   );
 };

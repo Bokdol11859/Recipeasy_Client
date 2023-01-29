@@ -15,8 +15,8 @@ const RecipeHeader = ({
   duration: number;
 }) => {
   return (
-    <div className="mt-20 h-full w-full px-6">
-      <h1 className="mb-2 text-xl font-bold text-[#242424]">{title}</h1>
+    <div className="mt-20 mb-4 w-full px-6">
+      <h1 className="mb-2 text-xl font-extrabold text-[#242424]">{title}</h1>
       <p className="mb-4 text-sm font-medium text-[#7B7B7B]">{description}</p>
       <div className="flex w-full gap-5">
         <div className="flex h-fit w-full flex-col rounded-xl bg-white p-4">

@@ -1,3 +1,5 @@
+import { IngredientType } from './IngredientType';
+
 interface RecipeType {
   id: number;
   video: string;
@@ -6,7 +8,7 @@ interface RecipeType {
   image: string;
   save_count: number;
   theme: number;
-  required_ingredients: { name: string }[];
+  required_ingredients: IngredientType[];
 }
 
 export default RecipeType;

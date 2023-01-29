@@ -300,3 +300,14 @@ export const StarIcon = ({ isActive = false }: { isActive?: boolean }) => (
     />
   </svg>
 );
+
+export const SubstituteIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.5 10H3M16.5 10L13.5 13M16.5 10L13.5 7M3 10L6 13M3 10L6 7"
+      stroke="#120000"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
