@@ -4,8 +4,10 @@
   "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
+  "app_name": "Recipeasy",
   "name": "Recipeasy",
   "short_name": "Recipeasy",
+  "description": "방구석 셰프를 위한 1분 레시피",
   "icons": [
     {
       "src": "icon.png",
