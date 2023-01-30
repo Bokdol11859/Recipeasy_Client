@@ -18,7 +18,7 @@ const RecipeList = ({ recipes }: { recipes: RecipeType[] }) => {
   return (
     <div className="mt-2 mb-14 flex w-full snap-x snap-mandatory gap-3 overflow-x-scroll scrollbar-hide">
       {recipes?.map((recipe: RecipeType) => (
-        <div key={recipe.id} className="flex snap-center flex-col gap-1">
+        <div key={recipe.id} className="flex w-fit snap-center flex-col gap-1">
           <SmallCard
             id={recipe.id}
             title={recipe.title}
