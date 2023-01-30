@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <div className="flex w-full flex-grow items-center justify-center">
-        <Image src="/assets/LoginLogo.png" alt="Login Logo" width={220} height={90} />
+        <Image src="/assets/LoginLogo.png" alt="Login Logo" width={240} height={90} />
       </div>
       <div className="flex h-52 items-center justify-center">
         <KakaoLogin
