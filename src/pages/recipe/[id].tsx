@@ -31,7 +31,7 @@ const RecipeVideo = () => {
 
   return (
     <div className="relative flex h-full w-full flex-col justify-between bg-black">
-      <div className="z-10 flex h-36 w-full flex-col px-6 text-white">
+      <div className="z-10 flex h-36 w-full flex-col px-6 pt-6 text-white">
         <div className="flex h-12 w-full items-center pt-2">
           <BackArrowIcon onClick={back} isWhite />
         </div>
