@@ -37,7 +37,7 @@ const SearchResult = ({ query }: { query: string }) => {
 
   return (
     <>
-      <div className="my-6 flex items-center justify-center gap-6 ">
+      <div className="my-6 flex items-center justify-center gap-6">
         <p
           className={category === CATEGORY.RECIPE ? ActiveTab : InactiveTab}
           onClick={() => setCategory(CATEGORY.RECIPE)}>
@@ -52,7 +52,7 @@ const SearchResult = ({ query }: { query: string }) => {
 
       {/* FIXME: fix grid issue with h-full property */}
       {category === CATEGORY.RECIPE && (
-        <div className="grid h-full grid-cols-2 justify-items-center gap-x-2 gap-y-4 overflow-y-scroll pb-52 scrollbar-hide">
+        <div className="grid h-full w-full grid-cols-2 justify-items-center gap-x-2 gap-y-4 overflow-y-scroll pb-52 scrollbar-hide">
           {recipeQuery.isLoading
             ? Array(10)
                 .fill('')

@@ -31,7 +31,7 @@ export const SmallCard = ({
         priority
         width={400}
         height={500}
-        className="h-[280px] w-[41.5vw] max-w-[180px] rounded-xl bg-cover brightness-100"
+        className="h-auto w-[200px] rounded-xl bg-cover brightness-100"
         src={image}
         alt={title}
       />

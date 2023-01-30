@@ -28,7 +28,7 @@ const Search = () => {
 
   return (
     <>
-      <div className="h-full w-full px-5 pt-6">
+      <div className="h-full w-full px-6 pt-6">
         <div className="mb-4 flex h-9 w-full items-center justify-center">
           {query.length > 0 && (
             <div className="mr-3">
