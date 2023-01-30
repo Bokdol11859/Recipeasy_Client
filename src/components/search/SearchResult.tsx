@@ -52,7 +52,7 @@ const SearchResult = ({ query }: { query: string }) => {
 
       {/* FIXME: fix grid issue with h-full property */}
       {category === CATEGORY.RECIPE && (
-        <div className="grid h-full grid-cols-2 justify-items-center gap-x-2 gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
+        <div className="grid h-full grid-cols-2 justify-items-center gap-x-2 gap-y-4 overflow-y-scroll pb-52 scrollbar-hide">
           {recipeQuery.isLoading
             ? Array(10)
                 .fill('')
@@ -105,7 +105,7 @@ const SearchResult = ({ query }: { query: string }) => {
               ))}
           </div>
         ) : (
-          <div className="flex w-full flex-wrap items-center justify-center gap-y-4 overflow-y-scroll pb-64 scrollbar-hide">
+          <div className="flex h-full w-full flex-col items-center justify-start gap-y-4 overflow-y-scroll pb-52 scrollbar-hide">
             {themeQuery.data.map((theme: ThemeType) => (
               <LargeCard
                 key={theme.id}
