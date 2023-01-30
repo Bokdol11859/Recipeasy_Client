@@ -1,8 +1,6 @@
 import React from 'react';
 import { StarIcon, TimeIcon } from '../icons/SystemIcons';
 
-type Props = {};
-
 const RecipeHeader = ({
   title,
   description,

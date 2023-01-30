@@ -47,8 +47,8 @@ const RecipeDetail = () => {
         additional_ingredients={recipeQuery.data?.data.additional_ingredients}
         equipment={recipeQuery.data?.data.equipment}
       />
-      <div className="h-3 w-full bg-[#FBF9F6]" />
-      <RecipeSteps />
+      <div className="h-4 w-full bg-[#FBF9F6]" />
+      <RecipeSteps recipe_sequence={recipeQuery.data?.data.recipe_sequence} />
     </div>
   );
 };
