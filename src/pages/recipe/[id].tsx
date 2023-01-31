@@ -1,5 +1,6 @@
 import { getRecipeDetail, getUserInfo, toggleRecipe } from '@src/api/fetcher';
 import { BackArrowIcon, SaveIcon } from '@src/components/icons/SystemIcons';
+import useSavedData from '@src/hooks/useSavedData';
 import RecipeType from '@src/types/RecipeType';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -7,13 +8,10 @@ import React from 'react';
 
 const RecipeVideo = () => {
   const { query, back, isReady, push } = useRouter();
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
+
+  const { isSavedRecipe } = useSavedData();
 
   const recipeQuery = useQuery(['recipe', query.id], () => getRecipeDetail(Number(query.id)));
-
-  const isSavedRecipe = (id: number) => {
-    return userInfo.data?.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
-  };
 
   const queryClient = useQueryClient();
 

@@ -2,6 +2,7 @@ import { getThemeDetail, getUserInfo, toggleTheme } from '@src/api/fetcher';
 import Header from '@src/components/global/Header';
 import RecipeList from '@src/components/theme/RecipeList';
 import ThemeHeader from '@src/components/theme/ThemeHeader';
+import useSavedData from '@src/hooks/useSavedData';
 import ThemeType from '@src/types/ThemeType';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -9,12 +10,9 @@ import React from 'react';
 
 const ThemeDetail = () => {
   const { query } = useRouter();
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
   const themeQuery = useQuery(['theme', query.id], () => getThemeDetail(Number(query.id)));
 
-  const isSavedTheme = (id: number) => {
-    return userInfo.data?.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
-  };
+  const { isSavedTheme } = useSavedData();
 
   const queryClient = useQueryClient();
 

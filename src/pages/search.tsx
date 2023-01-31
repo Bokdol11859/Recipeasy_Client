@@ -7,7 +7,6 @@ import { useRecoilState } from 'recoil';
 import queryState from '@src/atoms/searchAtom';
 
 const Search = () => {
-  // FIXME: Set input, query to global state using redux/recoil
   const [input, setInput] = useState('');
   const [query, setQuery] = useRecoilState(queryState);
 

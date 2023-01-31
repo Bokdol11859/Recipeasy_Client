@@ -9,11 +9,11 @@ import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import categoryState from '@src/atoms/categoryAtom';
 import CATEGORY from '@src/constants/category';
+import useSavedData from '@src/hooks/useSavedData';
 
 const SearchResult = ({ query }: { query: string }) => {
   const [category, setCategory] = useRecoilState(categoryState);
 
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
   const themeQuery = useQuery(['searched_themes', query], () => queryThemeList(query), {
     enabled: category === CATEGORY.THEME,
   });
@@ -21,13 +21,7 @@ const SearchResult = ({ query }: { query: string }) => {
     enabled: category === CATEGORY.RECIPE,
   });
 
-  const isSavedTheme = (id: number) => {
-    return userInfo.data?.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
-  };
-
-  const isSavedRecipe = (id: number) => {
-    return userInfo.data?.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
-  };
+  const { isSavedRecipe, isSavedTheme } = useSavedData();
 
   const { push } = useRouter();
 

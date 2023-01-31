@@ -3,6 +3,7 @@ import Header from '@src/components/global/Header';
 import RecipeBody from '@src/components/recipe/RecipeBody';
 import RecipeHeader from '@src/components/recipe/RecipeHeader';
 import RecipeSteps from '@src/components/recipe/RecipeSteps';
+import useSavedData from '@src/hooks/useSavedData';
 import RecipeType from '@src/types/RecipeType';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -11,20 +12,14 @@ import React from 'react';
 const RecipeDetail = () => {
   const { query } = useRouter();
   const queryClient = useQueryClient();
-
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
   const recipeQuery = useQuery(['recipe', query.id], () => getRecipeDetail(Number(query.id)));
-
   const recipeMutation = useMutation(toggleRecipe, {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['UserInfo'] });
       await queryClient.invalidateQueries({ queryKey: ['recipe', query.id] });
     },
   });
-
-  const isSavedRecipe = (id: number) => {
-    return userInfo.data?.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
-  };
+  const { isSavedRecipe } = useSavedData();
 
   return (
     <div className="h-full w-full overflow-y-scroll bg-[#FBF9F6] scrollbar-hide">

@@ -5,15 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '@src/api/fetcher';
 import { IngredientIcon, TimeIcon } from '../icons/SystemIcons';
 import { useRouter } from 'next/router';
+import useSavedData from '@src/hooks/useSavedData';
 
 const RecipeList = ({ recipes }: { recipes: RecipeType[] }) => {
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
-
   const { push } = useRouter();
 
-  const isSavedRecipe = (id: number) => {
-    return userInfo.data?.saved_recipes.filter((recipe: RecipeType) => recipe.id === id).length === 1;
-  };
+  const { isSavedRecipe } = useSavedData();
 
   return (
     <div className="mt-2 mb-14 flex w-full snap-x snap-mandatory gap-3 overflow-x-scroll scrollbar-hide">

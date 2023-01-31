@@ -46,7 +46,7 @@ export const SmallCard = ({
 
 export const LoadingSmallCard = () => (
   <div className="relative flex flex-col">
-    <div className="h-[280px] w-[42vw] max-w-[200px] animate-pulse rounded-xl bg-gray-300" />
+    <div className="h-[300px] w-[42vw] max-w-[200px] animate-pulse rounded-xl bg-gray-300" />
     <div className="mt-1 ml-1 h-4 w-[75%] animate-pulse bg-gray-300" />
   </div>
 );
