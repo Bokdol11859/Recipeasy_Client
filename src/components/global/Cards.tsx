@@ -1,6 +1,7 @@
 import { SaveIcon } from '../icons/SystemIcons';
 import Image from 'next/image';
-import useMutateData from '@src/hooks/useMutateData';
+import useRecipeData from '@src/hooks/useRecipeData';
+import useThemeData from '@src/hooks/useThemeData';
 
 export const SmallCard = ({
   id,
@@ -15,7 +16,7 @@ export const SmallCard = ({
   isSaved: boolean;
   onClick: () => void;
 }) => {
-  const { recipeMutation } = useMutateData(id);
+  const { recipeMutation } = useRecipeData(id);
 
   return (
     <div onClick={onClick} className="relative flex h-fit flex-col">
@@ -60,7 +61,7 @@ export const LargeCard = ({
   isSaved: boolean;
   onClick: () => void;
 }) => {
-  const { themeMutation } = useMutateData(id);
+  const { themeMutation } = useThemeData(id);
 
   return (
     <div className="relative h-60 w-full max-w-[400px]" onClick={onClick}>
@@ -114,7 +115,7 @@ export const LongLargeCard = ({
   isSaved: boolean;
   onClick: () => void;
 }) => {
-  const { themeMutation } = useMutateData(id);
+  const { themeMutation } = useThemeData(id);
 
   return (
     <div className="relative h-[424px] w-full max-w-[400px]" onClick={onClick}>

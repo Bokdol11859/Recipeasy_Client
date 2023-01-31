@@ -1,10 +1,8 @@
-import { getThemeDetail } from '@src/api/fetcher';
 import Header from '@src/components/global/Header';
 import RecipeList from '@src/components/theme/RecipeList';
 import ThemeHeader from '@src/components/theme/ThemeHeader';
-import useMutateData from '@src/hooks/useMutateData';
+import useThemeData from '@src/hooks/useThemeData';
 import useSavedData from '@src/hooks/useSavedData';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -12,9 +10,8 @@ const ThemeDetail = () => {
   const { query } = useRouter();
 
   const { isSavedTheme } = useSavedData();
-  const { themeMutation } = useMutateData(Number(query.id));
 
-  const themeQuery = useQuery(['theme', query.id], () => getThemeDetail(Number(query.id)));
+  const { themeMutation, themeQuery } = useThemeData(Number(query.id));
 
   return (
     <div className="h-full w-full overflow-y-scroll scrollbar-hide">

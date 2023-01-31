@@ -1,8 +1,6 @@
-import { getRecipeDetail } from '@src/api/fetcher';
 import { BackArrowIcon, SaveIcon } from '@src/components/icons/SystemIcons';
-import useMutateData from '@src/hooks/useMutateData';
+import useRecipeData from '@src/hooks/useRecipeData';
 import useSavedData from '@src/hooks/useSavedData';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -10,9 +8,7 @@ const RecipeVideo = () => {
   const { query, back, isReady, push } = useRouter();
 
   const { isSavedRecipe } = useSavedData();
-  const { recipeMutation } = useMutateData(Number(query.id));
-
-  const recipeQuery = useQuery(['recipe', query.id], () => getRecipeDetail(Number(query.id)));
+  const { recipeMutation, recipeQuery } = useRecipeData(Number(query.id));
 
   const handleClick = (id: number) => {
     push(`/recipe/detail/${id}`);
