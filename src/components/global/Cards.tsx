@@ -4,6 +4,7 @@ import ThemeType from '@src/types/ThemeType';
 import Image from 'next/image';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toggleRecipe, toggleTheme } from '@src/api/fetcher';
+import useMutateData from '@src/hooks/useMutateData';
 
 export const SmallCard = ({
   id,
@@ -18,12 +19,7 @@ export const SmallCard = ({
   isSaved: boolean;
   onClick: () => void;
 }) => {
-  const queryClient = useQueryClient();
-
-  const recipeMutation = useMutation({
-    mutationFn: (id: number) => toggleRecipe(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['UserInfo'] }),
-  });
+  const { recipeMutation } = useMutateData(id);
 
   return (
     <div onClick={onClick} className="relative flex h-fit flex-col">
@@ -68,11 +64,8 @@ export const LargeCard = ({
   isSaved: boolean;
   onClick: () => void;
 }) => {
-  const queryClient = useQueryClient();
-  const themeMutation = useMutation({
-    mutationFn: (id: number) => toggleTheme(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['UserInfo'] }),
-  });
+  const { themeMutation } = useMutateData(id);
+
   return (
     <div className="relative h-60 w-full max-w-[400px]" onClick={onClick}>
       <Image
@@ -125,11 +118,8 @@ export const LongLargeCard = ({
   isSaved: boolean;
   onClick: () => void;
 }) => {
-  const queryClient = useQueryClient();
-  const themeMutation = useMutation({
-    mutationFn: (id: number) => toggleTheme(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['UserInfo'] }),
-  });
+  const { themeMutation } = useMutateData(id);
+
   return (
     <div className="relative h-[424px] w-full max-w-[400px]" onClick={onClick}>
       <Image

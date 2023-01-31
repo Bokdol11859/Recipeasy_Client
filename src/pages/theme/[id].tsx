@@ -2,6 +2,7 @@ import { getThemeDetail, getUserInfo, toggleTheme } from '@src/api/fetcher';
 import Header from '@src/components/global/Header';
 import RecipeList from '@src/components/theme/RecipeList';
 import ThemeHeader from '@src/components/theme/ThemeHeader';
+import useMutateData from '@src/hooks/useMutateData';
 import useSavedData from '@src/hooks/useSavedData';
 import ThemeType from '@src/types/ThemeType';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -10,19 +11,11 @@ import React from 'react';
 
 const ThemeDetail = () => {
   const { query } = useRouter();
-  const themeQuery = useQuery(['theme', query.id], () => getThemeDetail(Number(query.id)));
 
   const { isSavedTheme } = useSavedData();
+  const { themeMutation } = useMutateData(Number(query.id));
 
-  const queryClient = useQueryClient();
-
-  const themeMutation = useMutation({
-    mutationFn: (id: number) => toggleTheme(id),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['UserInfo'] });
-      await queryClient.invalidateQueries({ queryKey: ['theme', query.id] });
-    },
-  });
+  const themeQuery = useQuery(['theme', query.id], () => getThemeDetail(Number(query.id)));
 
   return (
     <div className="h-full w-full overflow-y-scroll scrollbar-hide">

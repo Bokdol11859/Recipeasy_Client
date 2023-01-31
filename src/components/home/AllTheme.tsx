@@ -3,10 +3,12 @@ import { LargeCard, LoadingLargeCard } from '../global/Cards';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { getThemeList, getUserInfo } from '@src/api/fetcher';
 import { useRouter } from 'next/router';
+import useSavedData from '@src/hooks/useSavedData';
 
 const AllTheme = () => {
   const { data, isLoading, error } = useQuery(['themes'], getThemeList);
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
+
+  const { isSavedTheme } = useSavedData();
 
   const { push } = useRouter();
 
@@ -16,10 +18,6 @@ const AllTheme = () => {
 
   const handleClick = (id: number) => {
     push(`theme/${id}`);
-  };
-
-  const isSavedTheme = (id: number) => {
-    return userInfo.data?.saved_themes.filter((theme: ThemeType) => theme.id === id).length === 1;
   };
 
   return (

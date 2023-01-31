@@ -1,5 +1,6 @@
 import { getRecipeDetail, getUserInfo, toggleRecipe } from '@src/api/fetcher';
 import { BackArrowIcon, SaveIcon } from '@src/components/icons/SystemIcons';
+import useMutateData from '@src/hooks/useMutateData';
 import useSavedData from '@src/hooks/useSavedData';
 import RecipeType from '@src/types/RecipeType';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -10,18 +11,9 @@ const RecipeVideo = () => {
   const { query, back, isReady, push } = useRouter();
 
   const { isSavedRecipe } = useSavedData();
+  const { recipeMutation } = useMutateData(Number(query.id));
 
   const recipeQuery = useQuery(['recipe', query.id], () => getRecipeDetail(Number(query.id)));
-
-  const queryClient = useQueryClient();
-
-  const recipeMutation = useMutation({
-    mutationFn: (id: number) => toggleRecipe(id),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['UserInfo'] });
-      await queryClient.invalidateQueries({ queryKey: ['recipe', query.id] });
-    },
-  });
 
   const handleClick = (id: number) => {
     push(`/recipe/detail/${id}`);
