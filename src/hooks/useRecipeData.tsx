@@ -1,9 +1,8 @@
-import { getRecipeDetail, getUserInfo, toggleRecipe } from '@src/api/fetcher';
+import { getRecipeDetail, toggleRecipe } from '@src/api/fetcher';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 const useRecipeData = (id: number) => {
   const queryClient = useQueryClient();
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
 
   const recipeQuery = useQuery(['recipe', id], () => getRecipeDetail(id));
   const recipeMutation = useMutation({

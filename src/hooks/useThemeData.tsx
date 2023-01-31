@@ -1,9 +1,8 @@
-import { getThemeDetail, getUserInfo, toggleTheme } from '@src/api/fetcher';
+import { getThemeDetail, toggleTheme } from '@src/api/fetcher';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 const useData = (id: number) => {
   const queryClient = useQueryClient();
-  const userInfo = useQuery(['UserInfo'], getUserInfo);
 
   const themeQuery = useQuery(['theme', id], () => getThemeDetail(id));
   const themeMutation = useMutation({
