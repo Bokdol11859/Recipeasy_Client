@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import GNB from '../components/global/GNB';
-import { QueryClient, dehydrate, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '@src/api/fetcher';
-import { SettingIcon } from '@src/components/icons/SystemIcons';
 import { LargeCard, LoadingSmallCard, SmallCard } from '@src/components/global/Cards';
 import { useRouter } from 'next/router';
 import RecipeType from '@src/types/RecipeType';
 import ThemeType from '@src/types/ThemeType';
-
-const CATEGORY = {
-  RECIPE: 'recipe',
-  THEME: 'theme',
-};
+import CATEGORY from '@src/constants/category';
 
 const MyPage = () => {
   const { isLoading, error, data } = useQuery(['UserInfo'], getUserInfo);
@@ -31,13 +26,7 @@ const MyPage = () => {
   return (
     <>
       <div className="h-full w-full px-6 pt-6">
-        <div className="flex w-full items-center justify-end">
-          {/* <SettingIcon
-            onClick={() => {
-              push('/settings');
-            }}
-          /> */}
-        </div>
+        <div className="flex w-full items-center justify-end"></div>
         <div className="mt-6 flex items-center justify-between">
           <p className="text-2xl font-extrabold">{data?.nickname}님</p>
         </div>
@@ -66,7 +55,6 @@ const MyPage = () => {
           </div>
         </div>
 
-        {/* FIXME: fix grid issue with h-full property */}
         {category === CATEGORY.RECIPE && (
           <div className="grid h-full w-full grid-cols-2 justify-items-center gap-x-4 gap-y-4 overflow-y-scroll pb-72 scrollbar-hide">
             {isLoading
@@ -109,16 +97,6 @@ const MyPage = () => {
     </>
   );
 };
-
-// export async function getServerSideProps() {
-//   const queryClient = new QueryClient();
-//   await queryClient.prefetchQuery(['themes'], getUserInfo);
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   };
-// }
 
 export const ActiveTab = 'font-extrabold text-lg';
 export const InactiveTab = 'font-extrabold text-lg text-[#B3B3B3]';

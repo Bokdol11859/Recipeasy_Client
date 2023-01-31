@@ -1,8 +1,6 @@
 import RecipeType from '@src/types/RecipeType';
 import React from 'react';
 import { SmallCard } from '../global/Cards';
-import { useQuery } from '@tanstack/react-query';
-import { getUserInfo } from '@src/api/fetcher';
 import { IngredientIcon, TimeIcon } from '../icons/SystemIcons';
 import { useRouter } from 'next/router';
 import useSavedData from '@src/hooks/useSavedData';

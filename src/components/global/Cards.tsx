@@ -1,9 +1,5 @@
-import RecipeType from '@src/types/RecipeType';
 import { SaveIcon } from '../icons/SystemIcons';
-import ThemeType from '@src/types/ThemeType';
 import Image from 'next/image';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toggleRecipe, toggleTheme } from '@src/api/fetcher';
 import useMutateData from '@src/hooks/useMutateData';
 
 export const SmallCard = ({

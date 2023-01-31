@@ -1,7 +1,7 @@
 import ThemeType from '@src/types/ThemeType';
 import { LargeCard, LoadingLargeCard } from '../global/Cards';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { getThemeList, getUserInfo } from '@src/api/fetcher';
+import { getThemeList } from '@src/api/fetcher';
 import { useRouter } from 'next/router';
 import useSavedData from '@src/hooks/useSavedData';
 

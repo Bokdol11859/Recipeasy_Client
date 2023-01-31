@@ -1,9 +1,8 @@
-import { getRecipeDetail, getUserInfo, toggleRecipe } from '@src/api/fetcher';
+import { getRecipeDetail } from '@src/api/fetcher';
 import { BackArrowIcon, SaveIcon } from '@src/components/icons/SystemIcons';
 import useMutateData from '@src/hooks/useMutateData';
 import useSavedData from '@src/hooks/useSavedData';
-import RecipeType from '@src/types/RecipeType';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
 

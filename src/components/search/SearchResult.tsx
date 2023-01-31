@@ -3,7 +3,7 @@ import ThemeType from '@src/types/ThemeType';
 import React from 'react';
 import { LargeCard, LoadingLargeCard, LoadingSmallCard, SmallCard } from '../global/Cards';
 import { useQuery } from '@tanstack/react-query';
-import { getUserInfo, queryRecipeList, queryThemeList } from '@src/api/fetcher';
+import { queryRecipeList, queryThemeList } from '@src/api/fetcher';
 import { IngredientIcon, TimeIcon } from '../icons/SystemIcons';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';

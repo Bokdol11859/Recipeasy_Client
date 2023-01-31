@@ -1,8 +1,6 @@
 import React from 'react';
 import { CalendarIcon, RiceIcon } from '../icons/SystemIcons';
 
-type Props = {};
-
 const ThemeHeader = ({
   title,
   themeType,

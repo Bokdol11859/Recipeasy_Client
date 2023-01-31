@@ -1,8 +1,7 @@
-import { AxiosPrivate, AxiosPublic } from '@src/api/axios';
+import { AxiosPrivate } from '@src/api/axios';
 
 export const getUserInfo = async () => {
   const res = await AxiosPrivate.get('/user');
-  console.log(res.data);
   return res.data.data[0];
 };
 

@@ -15,7 +15,6 @@ const RecipeBody = ({
     <div className="w-full bg-white px-6 py-5">
       <div className="flex items-center justify-between">
         <p className="text-lg font-bold">필수 재료</p>
-        {/* <div className="rounded-lg bg-[#FE8C46] p-2 text-xs font-medium text-white">계량하는 법 보기</div> */}
       </div>
       <div className="my-4 flex flex-col gap-5">
         {required_ingredients?.map((ingredient: IngredientType, idx) => (

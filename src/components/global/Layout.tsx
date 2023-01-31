@@ -1,5 +1,4 @@
 import React from 'react';
-import COLOR from '../../constants/theme';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

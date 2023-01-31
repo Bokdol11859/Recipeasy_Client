@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { LoadingLongLargeCard, LongLargeCard } from '../global/Cards';
 import ThemeType from '@src/types/ThemeType';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { getThemeList, getUserInfo } from '@src/api/fetcher';
+import { getThemeList } from '@src/api/fetcher';
 import { useRouter } from 'next/router';
 import useSavedData from '@src/hooks/useSavedData';
 

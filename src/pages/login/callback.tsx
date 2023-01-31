@@ -1,7 +1,6 @@
 import { AxiosPublic } from '@src/api/axios';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 interface GetUserResponse {
   access: string;

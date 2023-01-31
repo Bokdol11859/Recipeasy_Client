@@ -1,7 +1,5 @@
 import { KakaoLogin } from '@src/components/icons/SocialIcons';
-import COLOR from '@src/constants/theme';
 import refreshTokens from '@src/utils/refreshTokens';
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect } from 'react';

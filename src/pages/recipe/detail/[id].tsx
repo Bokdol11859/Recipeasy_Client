@@ -1,12 +1,11 @@
-import { getRecipeDetail, getUserInfo, toggleRecipe } from '@src/api/fetcher';
+import { getRecipeDetail } from '@src/api/fetcher';
 import Header from '@src/components/global/Header';
 import RecipeBody from '@src/components/recipe/RecipeBody';
 import RecipeHeader from '@src/components/recipe/RecipeHeader';
 import RecipeSteps from '@src/components/recipe/RecipeSteps';
 import useMutateData from '@src/hooks/useMutateData';
 import useSavedData from '@src/hooks/useSavedData';
-import RecipeType from '@src/types/RecipeType';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
 

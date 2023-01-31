@@ -2,7 +2,6 @@ import React from 'react';
 import { HomeIcon, SaveIcon, SearchIcon } from '../icons/GNBIcons';
 import { useRouter } from 'next/router';
 import PATH from '../../constants/path';
-import COLOR from '../../constants/theme';
 
 const GNB = () => {
   const { pathname, push } = useRouter();
